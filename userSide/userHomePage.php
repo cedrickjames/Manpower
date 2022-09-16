@@ -28,9 +28,9 @@
 </head>
   <body>
    
-  <nav class="navbar navbar-dark navbar-expand-sm shadow px-0 px-sm-3 sticky-top" style="background-color: #160A6B;">
+  <nav class="navbar navbar-dark navbar-expand-sm shadow px-0 px-sm-3 sticky-top" style="background-color: #061362;">
     <div class="container-fluid px-3">
-      <span class="navbar-brand me-4 	d-none d-sm-block " data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onclick="slideMainContent()">
+      <span class="navbar-brand me-4 	d-none d-lg-block " data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onclick="slideMainContent()">
         <i class="fa-solid fa-bars fa-sm"></i>
       </span>
       <span class="navbar-brand  mb-0 h1">Manpower</span>
@@ -132,7 +132,7 @@
 
 
 
-<div class="sidebar  d-none d-sm-block" id="sideBar" >
+<div class="sidebar  d-none d-lg-block" id="sideBar" >
 <div class="offcanvas show offcanvas-start" id="offcanvasExample"data-bs-scroll="true" data-bs-backdrop="false" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header px-0">
   <div class="containerName row">
@@ -155,28 +155,27 @@
   <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item side">
         <a href="#" class="nav-link side active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
-        <i class="fa fa-home fa-sm"></i>
-          Dashboard
+        <span class="icon-sampleIcon"></span>
+          &nbsp Forecast
         </a>
       </li>
       <li>
         <a href="#" class="nav-link side" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-        <i class="fa fa-users fa-sm"></i>
-
-          Members
+       
+        <i class="fa fa-chart-simple fa-sm"></i>
+        &nbsp   Dashboard
         </a>
       </li>
       <li>
         <a href="#" class="nav-link side" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false">
-        <i class="fa fa-money-check fa-sm"></i>
-
-          Payout
+        <i class="fa fa-users fa-sm"></i>
+        &nbsp   Employees
         </a>
       </li>
       <li>
         <a href="#" class="nav-link side" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
         <i class="fa fa-user fa-sm"></i>
-         Profile
+        &nbsp  Profile
         </a>
       </li>
      
@@ -188,15 +187,24 @@
 
 
 </div>
-<div class="main-content" id="mainContent">
-<div class="tab-content" id="v-pills-tabContent">
-    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">Welcome</div>
-    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">1</div>
-    <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">2</div>
-    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">3</div>
-    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">4</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
-  </div>
+</div>
+<?php include "./mainContent.php" ?>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <script src="../sidebars.js"></script> 

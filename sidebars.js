@@ -9,6 +9,7 @@
 
 var a=0;
 
+
 function slideMainContent(){
 if(a==0){
 document.getElementById("mainContent").style.width="100%";  

@@ -1,10 +1,11 @@
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: white;
-  background-color: #160A6B;
+  background: rgb(28, 26, 49);
+  background: linear-gradient(90deg, #061362 0%, rgba(18, 21, 201, 0.6352941176) 100%);
 }
 
 .nav-link.side {
-  color: #0d0486;
+  color: #061362;
 }
 
 .nav-link {
@@ -36,7 +37,7 @@
 .initialsOfName {
   height: 100%;
   width: 100%;
-  background-color: #0C4223;
+  background-color: #061362;
   border-radius: 50%;
   margin-right: 20px;
   text-align: center;
@@ -219,8 +220,9 @@
 }
 
 #v-pills-home {
-  background-color: #f867c0;
   height: 100%;
+  padding-top: 30px;
+  padding: 50px;
 }
 
 #v-pills-profile {
@@ -236,4 +238,86 @@
 #v-pills-messages {
   background-color: #f89567;
   height: 100%;
+}
+
+@media (max-width: 992px) {
+  .main-content {
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+.balance-container {
+  width: 95%;
+  margin: auto;
+  border-radius: 15px;
+  background: #061362;
+  background: linear-gradient(90deg, #0d0e16 0%, #061362 100%);
+  height: 25%;
+}
+
+@font-face {
+  font-family: "icomoon";
+  src: url("../icons/icomoon.eot?1lb3wz");
+  src: url("../icons/icomoon.eot?1lb3wz#iefix") format("embedded-opentype"), url("../icons/icomoon.ttf?1lb3wz") format("truetype"), url("../icons/icomoon.woff?1lb3wz") format("woff"), url("../icons/icomoon.svg?1lb3wz#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+[class^=icon-], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "icomoon" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sampleIcon:before {
+  content: "\e900";
+}
+
+.icon-sampleIcon {
+  left: -3px;
+}
+
+.card-body {
+  color: #0b1364;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(2, 1, 71, 0.452), 0 4px 8px rgba(0, 0, 0, 0.06);
+  transform: rotate(0deg) skew(0deg) translate(0, -30px);
+  transition: 0.5s;
+  background-color: #061262;
+}
+.card:hover .card-title {
+  color: white;
+}
+.card:hover .list-group-item {
+  background-color: #2c3491;
+  color: white;
+}
+.card:hover .text-muted {
+  --bs-text-opacity: 1;
+  color: #fcd600 !important;
+}
+
+.card {
+  transition: 0.5s;
+  margin: 15px;
+  text-decoration: none;
+}
+
+.card-title {
+  transition: 0.5s;
+}
+
+.list-group-item {
+  transition: 0.5s;
 }/*# sourceMappingURL=style.css.map */
