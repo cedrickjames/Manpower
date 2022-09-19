@@ -155,27 +155,30 @@
   <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item side">
         <a href="#" class="nav-link side active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
-        <span class="icon-sampleIcon"></span>
-          &nbsp Forecast
+        <div class="icon-sampleIcon d-inline"></div>
+          <div class=" d-inline ms-1">Forecast</div>
         </a>
       </li>
       <li>
         <a href="#" class="nav-link side" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-       
-        <i class="fa fa-chart-simple fa-sm"></i>
-        &nbsp   Dashboard
+        <div class="d-inline me-1" ><i class="fa fa-chart-simple fa-sm "></i></div>
+        
+        <div class="d-inline ms-1">Dashboard</div>
         </a>
+     
       </li>
       <li>
         <a href="#" class="nav-link side" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false">
-        <i class="fa fa-users fa-sm"></i>
-        &nbsp   Employees
+        <div class="d-inline" style="margin-right: 2px">  <i class="fa fa-users fa-sm"></i></div>
+       
+      <div class="d-inline">Employees</div>
         </a>
       </li>
       <li>
         <a href="#" class="nav-link side" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-        <i class="fa fa-user fa-sm"></i>
-        &nbsp  Profile
+        <div class="d-inline" style="margin-right: 6px"><i class="fa fa-user fa-sm"></i></div>
+        <div class="d-inline">Profile</div>
+    
         </a>
       </li>
      

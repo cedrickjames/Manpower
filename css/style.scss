@@ -117,6 +117,7 @@ width: calc(100% - 280px);
 // background-color: #0C4223;
 color:white;
 margin-left:280px;
+
 }
 .sidebar {
 
@@ -316,3 +317,63 @@ background-color: #061262;
 .list-group-item{
   transition: .5s;
 }
+.searchInput {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: flex-end;
+  margin: 20px 0px;
+  padding: 0px 4px;
+}
+.searchInput input {
+  border: 1px solid #e5e5e5;
+  border-radius: 50px;
+  margin-left: 8px;
+  height: 34px;
+  width: 100%;
+  padding: 0px 25px 0px 10px;
+  transition: all .6s ease;
+}
+.searchInput label {
+  color: #767676;
+  font-weight: normal;
+}
+.searchInput input:placeholder-shown {
+  width: 13%;
+}
+.searchInput:hover input:placeholder-shown {
+  width: 100%;
+  cursor: pointer;
+}
+.searchInput:after {
+  font-family: 'FontAwesome';
+  color: #d4d4d4;
+  position: relative;
+  content: "\f002";
+  right: 25px;
+}
+.goback{
+  align-items: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 20px 0px;
+  padding: 0px 4px;
+  justify-content: flex-start;
+  width: 50%;
+}
+#goBack{
+  width: 120px;
+}
+#forecastForm{
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  color: #0d0e16;
+}
+.computer input{
+font-size: 30px;
+}
+
