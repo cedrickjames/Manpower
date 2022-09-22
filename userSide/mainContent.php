@@ -1,300 +1,104 @@
+
+<?php
+
+include ("../connection.php");
+  $db= $con;
+
+
+
+
+  $tableName="line";
+ $columns= ['line_id', 'line_name','line_desc','line_location','last_time_updated','line_photo'];
+ $fetchDataLine = fetch_data_line($db, $tableName, $columns, $username);
+
+
+ function fetch_data_line($db, $tableName, $columns){
+   if(empty($db)){
+    $msg= "Database connection error";
+   }elseif (empty($columns) || !is_array($columns)) {
+    $msg="columns Name must be defined in an indexed array";
+   }elseif(empty($tableName)){
+     $msg= "Table Name is empty";
+  }else{
+  $columnName = implode(", ", $columns);
+  $query = "SELECT * FROM `line`";
+ //  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
+  $result = $db->query($query);
+  if($result== true){ 
+   if ($result->num_rows > 0) {
+      $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
+      $msg= $row;
+   } else {
+      $msg= "No Data Found"; 
+   }
+  }else{
+    $msg= mysqli_error($db);
+  }
+  }
+  return $msg;
+  }
+
+
+
+
+
+
+
+?>
 <div class="main-content " id="mainContent">
   <div class="tab-content " id="v-pills-tabContent">
     <div class="tab-pane fade show active " id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
       tabindex="0">
 
-      <div class="row" id="bcModel" style="display: none">
-        <div class="col goback">
-          <!-- <input type="text" class="form-control" placeholder="First name" aria-label="First name"> -->
-          <button type="button" class="form-control btn btn-outline-primary text-start" id="goBack"
-            onclick="showLine()">
-            <span><i class="fa-solid fa-arrow-left"></i></span>
-            Go back</button>
 
-        </div>
-        <div class=" searchInput col">
-          <input type="search" class="form-control" id="filterbox" placeholder=" " onkeyup="getSelectValueDaily();">
-        </div>
-      </div>
+      <div id="cardholder">
+      <h2 class="fw-bolder text-dark ps-4">Line </h2>
 
-      <div class="row row-cols-1 row-cols-md-4 g-4 " id="cardholder">
+      <div class="row row-cols-1 row-cols-md-4 g-4 " >
+     <?php           if(is_array($fetchDataLine)){      
+                                 
+                                  foreach($fetchDataLine as $data){
+                                    $machineName = $data['line_name'];
+                                    $machineDesc = $data['line_desc'];
+                                    $machineLoc = $data['line_location'];
+                                    $machineTimeAdded = $data['last_time_updated'];
+                                    $machinePhoto = $data['line_photo'];
+                                    $machineId = $data['line_id'];
 
-        <div class="col">
-          <a class="card" href="#" onclick="showTableForModel()">
+                                  ?>
+      <form action="userHomePage.php" method="POST">
+        <input type="submit" name="card" id="<?php echo $machineId; ?>" style="display: none">
+        <input type="text" name="lineID" value="<?php echo $machineId ?>" style="display:none">
+       <div class="col">
+        <!-- onclick="showTableForModel('<?php //echo $machineId;?>', '<?php //echo $machineName;?>')" -->
+          <a class="card"   onclick="clickCard('<?php echo $machineId; ?>')" >
 
-            <img src="../samplePictures/GPI Machine/BRM 10.png" class="card-img-top" alt="...">
-
+            <img src="<?php echo $machinePhoto;?>" class="card-img-top" alt="...">
+        
             <div class="card-body">
-              <h5 class="card-title">BRM 10</h5>
+              <h5 class="card-title"><?php echo $machineName;?></h5>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Banknote Recycler</li>
-              <li class="list-group-item">GPI 1</li>
+              <li class="list-group-item"><?php echo $machineDesc;?></li>
+              <li class="list-group-item"><?php echo $machineLoc;?></li>
             </ul>
             <div class="card-footer">
               <small class="text-muted">Last updated 3 mins ago</small>
             </div>
           </a>
         </div>
-        <div class="col">
-          <div class="card">
-            <img src="../samplePictures/GPI Machine/GFB 800.png" class="card-img-top" alt="...">
-
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-            </ul>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="../samplePictures/GPI Machine/GND 700.png" class="card-img-top" alt="...">
-
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-            </ul>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-
-            <img src="../samplePictures/GPI Machine/RBG 100.png" class="card-img-top" alt="...">
-
-            <div class="card-body">
-              <h5 class="card-title">RBG 100</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-            </ul>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="../samplePictures/GPI Machine/RBG 150.png" class="card-img-top" alt="...">
-
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-            </ul>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="../samplePictures/GPI Machine/RBG 200C2.png" class="card-img-top" alt="...">
-
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-            </ul>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="../samplePictures/GPI Machine/RBG 200C.png" class="card-img-top" alt="...">
-
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-            </ul>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="../samplePictures/GPI Machine/RBW 10.png" class="card-img-top" alt="...">
-
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-            </ul>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="../samplePictures/GPI Machine/UD 700.png" class="card-img-top" alt="...">
-
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-            </ul>
-            <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-          </div>
-        </div>
+        </form>
+            <?php 
+            }}else{
+              echo $fetchDataLine;
+            }
+            
+            ?>
+      
 
       </div>
-
-      <div class="row row-cols-1 row-cols-md-4 g-1" style="display: none" id="tableForModel">
-
-        <table class="table  table-striped table-hover">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr onclick="showForm()">
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
-
-
       </div>
-      <div class="w-5" style="display: none" id="forecastForm">
-      <h2 class="fw-bolder">Forecast </h2>
-      <form class="row g-3 computer">
-  <div class="form-floating col-md-6">
-    
-    <div class="form-floating">
-  <input type="number" class="form-control" placeholder="Enter year" id="floatingTextarea"></input>
-  <label for="floatingTextarea">Year</label>
-</div>
-  </div>
-  <div class="form-floating col-md-6">
-  <select id="inputMonth" class="form-select">
-      <option selected disabled>Choose...</option>
-      <option>January</option>
-      <option>February</option>
-      <option>March</option>
-      <option>April</option>
-      <option>May</option>
-      <option>June</option>
-      <option>July</option>
-      <option>August</option>
-      <option>September</option>
-      <option>October</option>
-      <option>November</option>
-      <option>December</option>
 
-
-    </select>
-    <label for="inputMonth">Month</label>
-
-  </div>
-  <div class="form-floating col-md-6">
-    <input type="text" class="form-control" id="inputLine" placeholder="Line name">
-    <label for="inputLine">Line</label>
-
-  </div>
-  <div class="form-floating col-md-6">
-    <input type="text" class="form-control" id="inputModel"placeholder="Model name">
-    <label for="inputModel" >Model</label>
-
-  </div>
-  <div class="form-floating col-md-12">
-    <input type="number" class="form-control" id="inputModel"placeholder="Projection quantity">
-    <label for="inputQuantity" >Projection Quantity</label>
-  </div>
-  <div class="form-floating col-md-2  ">
-    <input type="number" class="form-control" id="inputdaysOfWork"placeholder="Projection quantity">
-    <label for="inputdaysOfWork" >Days of work</label>
-  </div>
-  <div class="form-floating col-md-2">
-    <input type="number" class="form-control" id="inputActualManpower"placeholder="Projection quantity">
-    <label for="inputActualManpower" >Actual Manpower</label>
-  </div>
-  <div class="form-floating col-md-3">
-    <input type="number" class="form-control" id="inputJpnSTU"placeholder="Projection quantity">
-    <label for="inputJpnSTU" >Japan STU</label>
-  </div>
-  <div class="form-floating col-md-3">
-    <input type="number" class="form-control" id="inputGpiSTU"placeholder="Projection quantity">
-    <label for="inputGpiSTU" >GPI STU</label>
-  </div>
-  <div class="form-floating col-md-2">
-    <input type="number" class="form-control" id="inputActualTime"placeholder="Projection quantity">
-    <label for="inputActualTime" >Actual Time</label>
-  </div>
-  <div class="form-floating col-md-6">
-    <input type="number" class="form-control" id="inputTotGpiTarget"placeholder="Projection quantity">
-    <label for="inputTotGpiTarget" >Total GPI Target</label>
-  </div>
-  <div class="form-floating col-md-6">
-    <input type="number" class="form-control" id="inputTotActuak"placeholder="Projection quantity">
-    <label for="inputTotActuak" >Total (Actual)</label>
-  </div>
-  <div class="form-floating col-md-6">
-    <input type="number" class="form-control" id="inputForAct"placeholder="Projection quantity">
-    <label for="inputForAct" >Forecast Actual</label>
-  </div>
-  <div class="form-floating col-md-6">
-    <input type="number" class="form-control" id="inputMFGT"placeholder="Projection quantity">
-    <label for="inputMFGT" >MP Forecast GPI Target</label>
-  </div>
-  <div class="form-floating col-md-12">
-    <input type="number" class="form-control" id="inputMFGT"placeholder="Projection quantity">
-    <label for="inputMFGT" >Amount</label>
-  </div>
-  <div class="d-grid gap-2">
-  <button class="btn btn-outline-success" type="button">Submit</button>
-
-</div>
-</form>
-
-
-      </div>
 
     </div>
     <div class="tab-pane " id="table-for-models" role="tabpanel" aria-labelledby="table-for-models-tab" tabindex="0">
@@ -314,3 +118,50 @@
     </div>
   </div>
 </div>
+<?php 
+
+if(isset($_GET['carda'])){
+  // session_destroy();
+  $_SESSION['lineId']="";
+  $machineID = $_GET['card'];
+  echo $machineID;
+  $lineName = "";
+  $selectLine = "SELECT * FROM `line` WHERE `line_id` = '$machineID'";
+  $result = mysqli_query($con, $selectLine);
+  
+  while($userRow = mysqli_fetch_assoc($result)){
+    $lineName = $userRow['line_name'];
+    $_SESSION['lineId'] = $userRow['line_name'];
+    $_SESSION['lineName'] = $userRow['line_name'];
+    
+    
+  }
+
+
+  ?>
+  <style type="text/css">
+  #cardholder{
+     display:none;
+    }
+   #tableForModel{
+display: inline;
+}
+#bcModel{
+display: flex;
+}
+#forecastForm{
+display: none;
+}
+</style>
+
+<script>
+  document.getElementById("containerOfLineId").value=<?php echo $machineID?>;
+// document.getElementById("nameOfLine").innerHTML = "<?php echo $lineName;?>";
+document.getElementById("idOfLine").value="<?php echo $machineID?>";
+ document.getElementById("InputLineName").value="<?php echo $lineName?>";
+
+</script>
+  <?php
+
+}
+?>

@@ -1,3 +1,26 @@
+<?php
+session_start();
+include ("../connection.php");
+if(isset($_POST['card'])){
+  $_SESSION['lineId'] = $_POST["lineID"];
+  $_SESSION['show'] = "true";
+  $machineID = $_POST["lineID"];
+  $selectLine = "SELECT * FROM `line` WHERE `line_id` = '$machineID'";
+  $result = mysqli_query($con, $selectLine);
+  
+  while($userRow = mysqli_fetch_assoc($result)){
+    $lineName = $userRow['line_name'];
+    $_SESSION['lineId'] = $userRow['line_id'];
+    $_SESSION['lineName'] = $userRow['line_name'];
+    
+    
+
+echo  $_SESSION['lineName'];
+  header("location: list_of_models.php");
+  }
+}
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,6 +29,9 @@
     <title>Home Page</title>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="../node_modules/fontawesome-free-6.2.0-web/css/all.min.css">
+    <!-- <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css"> -->
+
+    
     <link rel="stylesheet" href="../css/style.css?v=<?php echo time(); ?>">
     <style>
       .bd-placeholder-img {
@@ -74,140 +100,17 @@
     </div>
   </nav>
 
+<?php include "../modals.php" ?>
+
 <!-- sidebar  -->
-<!-- <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-    <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      <span class="fs-4">Sidebar</span>
-    </a>
-    <hr>
-    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+<?php include "../sidebar.php" ?>
 
-
-    
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
-        <i class="fa-solid fa-home fa-sm"></i>
-          Home
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-          
-          Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="#"class="nav-link" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false" disabled>
-          
-          Orders
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-          Customers
-        </a>
-      </li>
-    </ul>
-    </div>
-    <hr>
-    
-</div>
-
-<div class="tab-content" id="v-pills-tabContent">
-    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">Welcome</div>
-    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">...</div>
-    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">...</div>
-  </div> -->
-
-
-
-<div class="sidebar  d-none d-lg-block" id="sideBar" >
-<div class="offcanvas show offcanvas-start" id="offcanvasExample"data-bs-scroll="true" data-bs-backdrop="false" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header px-0">
-  <div class="containerName row">
-        <div class="blue px-3 col-4">
-        <div class="initialsOfName">CJ</div>
-        </div>
-        <div class="pink col-8">
-            <div class="name col-12">
-              <h5>Cedrick James</h5>
-            </div>
-            <div class="green col-12">
-            <h6>Production 1</h6>
-            </div>
-        </div>
-     
-    </div>
-  </div>
-     <hr>
-  <div class="offcanvas-body">
-  <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item side">
-        <a href="#" class="nav-link side active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
-        <div class="icon-sampleIcon d-inline"></div>
-          <div class=" d-inline ms-1">Forecast</div>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link side" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-        <div class="d-inline me-1" ><i class="fa fa-chart-simple fa-sm "></i></div>
-        
-        <div class="d-inline ms-1">Dashboard</div>
-        </a>
-     
-      </li>
-      <li>
-        <a href="#" class="nav-link side" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false">
-        <div class="d-inline" style="margin-right: 2px">  <i class="fa fa-users fa-sm"></i></div>
-       
-      <div class="d-inline">Employees</div>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link side" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-        <div class="d-inline" style="margin-right: 6px"><i class="fa fa-user fa-sm"></i></div>
-        <div class="d-inline">Profile</div>
-    
-        </a>
-      </li>
-     
-    </ul>
-  </div>
-</div>
- 
-
-
-
-</div>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 <?php include "./mainContent.php" ?>
+
+<!-- <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script> -->
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" ></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" ></script> -->
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <script src="../sidebars.js"></script> 

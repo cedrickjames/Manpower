@@ -7,11 +7,11 @@
   })
 })()
 
-var a=0;
+var sidebar=0;
 
 
 function slideMainContent(){
-if(a==0){
+if(sidebar==0){
 document.getElementById("mainContent").style.width="100%";  
 document.getElementById("mainContent").style.marginLeft= "0px"; 
 // document.getElementById("sidebar").style.opacity= ""; 
@@ -24,13 +24,13 @@ document.getElementById("mainContent").style.transition = "all .3s";
 
 
 
-  a=1;
+sidebar=1;
 }
 else{
   document.getElementById("mainContent").style.width="calc(100% - 280px)";  
 document.getElementById("mainContent").style.marginLeft= "280px";  
 
-  a=0;
+sidebar=0;
 }
 
 }

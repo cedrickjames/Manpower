@@ -289,21 +289,21 @@
   color: #0b1364;
 }
 
-.card:hover {
+#cardholder .card:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(2, 1, 71, 0.452), 0 4px 8px rgba(0, 0, 0, 0.06);
   transform: rotate(0deg) skew(0deg) translate(0, -30px);
   transition: 0.5s;
   background-color: #061262;
 }
-.card:hover .card-title {
+#cardholder .card:hover .card-title {
   color: white;
 }
-.card:hover .list-group-item {
+#cardholder .card:hover .list-group-item {
   background-color: #2c3491;
   color: white;
 }
-.card:hover .text-muted {
+#cardholder .card:hover .text-muted {
   --bs-text-opacity: 1;
   color: #fcd600 !important;
 }
@@ -407,4 +407,53 @@
 
 .computer input {
   font-size: 30px;
+}
+
+.form-floating > .form-select {
+  padding-top: 1rem;
+  padding-bottom: 0px;
+}
+
+#inputMonth {
+  font-size: 30px;
+}
+
+#forecastOptionButton:hover {
+  color: #f8676e;
+}
+
+#forecastOption {
+  display: none;
+}
+
+#forecastOption .list-group-item:hover {
+  color: white;
+  background: rgb(28, 26, 49);
+  background: linear-gradient(90deg, #757783 0%, rgba(18, 21, 201, 0.6352941176) 100%);
+  transition: 0s;
+}
+
+.col-form {
+  align-items: center;
+  display: grid;
+}
+
+#addmodel:first-child:hover, :not(.btn-check) + #addmodel:hover {
+  color: var(--bs-btn-hover-color);
+  background-color: #22235c;
+  border-color: #061362;
+}
+
+#addmodel {
+  color: #061362;
+  border-color: #061362;
+}
+
+#forecastForm {
+  display: none;
+}
+
+#listOfModels {
+  --bs-table-hover-color: #ffffff;
+  --bs-table-hover-bg: rgb(45 53 118 / 69%);
 }/*# sourceMappingURL=style.css.map */

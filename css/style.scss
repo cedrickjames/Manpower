@@ -285,14 +285,16 @@ left:-3px
 .card-body {
 
   color: #0b1364
+  
 }
-.card:hover{
+#cardholder .card:hover{
   transform: scale(1.05);
 box-shadow: 0 10px 20px rgba(2, 1, 71, 0.452), 0 4px 8px rgba(0,0,0,.06);
 transform: rotate(0deg) skew(0deg) translate(0, -30px);
 
 transition: .5s;
 background-color: #061262;
+
 .card-title{
   color: white;
 }
@@ -306,6 +308,7 @@ background-color: #061262;
 }
 
 }
+
 .card{
   transition: .5s;
   margin: 15px;
@@ -316,6 +319,7 @@ background-color: #061262;
 }
 .list-group-item{
   transition: .5s;
+  
 }
 .searchInput {
   width: 50%;
@@ -376,4 +380,55 @@ background-color: #061262;
 .computer input{
 font-size: 30px;
 }
+.form-floating>.form-select {
+  padding-top: 1rem;
+  padding-bottom: 0px;
+}
+#inputMonth{
+  font-size: 30px;
+}
+#forecastOptionButton:hover{
+color: #f8676e;
+}
+#forecastOption{
+  display: none;
+}
 
+#forecastOption .list-group-item:hover {
+  color: white;
+  // background-color: #160A6B;
+  background: rgb(28, 26, 49);
+background: linear-gradient(90deg, #757783 0%, #1215c9a2 100%);
+transition: 0s;
+}
+
+.col-form{
+  align-items: center;
+    display: grid;
+}
+#addmodel:first-child:hover, :not(.btn-check)+ #addmodel:hover {
+  color: var(--bs-btn-hover-color);
+  background-color: #22235c;
+  border-color: #061362;
+}
+#addmodel{
+  color: #061362;
+  border-color: #061362;
+}
+
+// #tableForModel{
+//   display: none;
+// }
+#forecastForm{
+  display: none;
+
+}
+// #bcModel{
+//   display: none;
+
+// }
+
+#listOfModels{
+  --bs-table-hover-color: #ffffff;
+  --bs-table-hover-bg: rgb(45 53 118 / 69%);
+}
