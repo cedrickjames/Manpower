@@ -145,6 +145,8 @@
   </div>
 </div>
 
+
+
 <div class="modal fade" id="updateWorkingDaysModal" tabindex="-1" aria-labelledby="updateWorkingDaysModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -156,74 +158,60 @@
       <div class="modal-body">
         <div class="row row-cols-1 row-cols-md-1 g-1 ">
           <div class="col col-form">
-            <form method="POST" action="../phpSubmit/addWorkingDays.php" name="workingDays" enctype="multipart/form-data" class="m-3">
-              <div class="form-floating mb-3">
-                <input type="number" name="modal_year" class="form-control" id="InputYear" placeholder="Line Name"
-                  value="<?php $year = new DateTime(); $year  = $year->format('Y'); echo $year; ?>">
+            
+            
+              <form action="userHomePage.php" method="POST">
+              <div class="input-group mb-3"  id="year1">
+              
+              <input type="number" name="modal_year" class="form-control" id="InputYear" placeholder="Year "
+                  value="<?php
+                  if($_SESSION['chosenYearinWorkingDays']==""){
+                    $year = new DateTime(); $year  = $year->format('Y'); echo $year; 
+                  }
+                  else{
+                    echo $_SESSION['chosenYearinWorkingDays'];
+                  }
+                  ?>">    
+      <button class="btn btn-outline-success" type="submit" name="changeYear" id="button-addon2">Submit</button>
+     
+    </div>
+    </form>
+    <form method="POST" action="../phpSubmit/addWorkingDays.php" name="workingDays" enctype="multipart/form-data" class="m-3">
+        <div class="form-floating mb-3" id="year2" style="display: none">
+                <input type="number" name="modal_year2" class="form-control" id="InputYear" placeholder="Line Name"
+                  value="<?php// $year = new DateTime(); $year  = $year->format('Y'); echo $year; ?>">
                 <label for="InputYearName">Year</label>
               </div>
               <table class="table table-striped table-hover" style="width:  100%" id="listOfModels"
                 class="table datacust-datatable Table ">
                 <thead class="thead-primary table-light" style="position: sticky;top: -1px;">
 
-
+                
                   <tr  class=" table-bordered text-center">
                     <th style="">Month</th>
                     <th class="w-10">Working days</th>
                   </tr>
                 </thead>
                 <tbody class="text-center" id="modelsBody">
+                <?php           if(is_array($fetchDataWD)){      
+                         $idNumber = 1;
+                                 foreach($fetchDataWD as $data){
+                                    $days = $data[$chosenYear];
+                                    $month = $data['month'];
+                                 
+
+                                 ?>
+
                 <tr  class=" table-bordered text-center">
-                    <th style="">January</th>
-                    <th style=""><input type="number" name="day1" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
+                    <th style=""><?php echo $month ?></th>
+                    <th style=""><input type="number" name="day<?php echo $idNumber; ?>" value="<?php echo $days;?>" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
 
                   </tr>
-                  <tr  class=" table-bordered text-center">
-                    <th style="">February</th>
-                    <th style=""><input type="number" name="day2" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
-                  </tr>
-                  <tr  class=" table-bordered text-center">
-                    <th style="">March</th>
-                    <th style=""><input type="number" name="day3" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
-                  </tr>
-                  <tr  class=" table-bordered text-center">
-                    <th style="">April</th>
-                    <th style=""><input type="number" name="day4" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
-
-                  </tr>
-                  <tr  class=" table-bordered text-center">
-                    <th style="">May</th>
-                    <th style=""><input type="number" name="day5" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
-                  </tr>
-                  <tr  class=" table-bordered text-center">
-                    <th style="">June</th>
-                    <th style=""><input type="number" name="day6" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
-                  </tr>
-                  <tr  class=" table-bordered text-center">
-                    <th style="">July</th>
-                    <th style=""><input type="number" name="day7" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
-                  </tr>
-                  <tr  class=" table-bordered text-center">
-                    <th style="">August</th>
-                    <th style=""><input type="number" name="day8" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
-                  </tr>
-                  <tr  class=" table-bordered text-center">
-                    <th style="">Septemper</th>
-                    <th style=""><input type="number" name="day9" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
-                  </tr>
-                  <tr  class=" table-bordered text-center">
-                    <th style="">October</th>
-                    <th style=""><input type="number" name="day10" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
-                  </tr>
-                  <tr  class=" table-bordered text-center">
-                    <th style="">November</th>
-                    <th style=""><input type="number" name="day11" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
-                  </tr>
-                  <tr  class=" table-bordered text-center">
-                    <th style="">December</th>
-                    <th style=""><input type="number" name="day12" disabled class="h-100 w-10 border border-primary border-opacity-25"></th>
-                  </tr>
-
+                  <?php 
+         $idNumber++; }}else{
+            }
+                ?>
+                  
                 </tbody>
               </table>
 

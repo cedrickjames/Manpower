@@ -1,6 +1,11 @@
 <?php
 session_start();
 include ("../connection.php");
+$db= $con;
+date_default_timezone_set("Asia/Singapore");
+$year = new DateTime(); $year  = $year->format('Y'); 
+$_SESSION['chosenYearinWorkingDays'] = $year;
+
 if(isset($_POST['card'])){
   $_SESSION['lineId'] = $_POST["lineID"];
   $_SESSION['show'] = "true";
@@ -15,10 +20,11 @@ if(isset($_POST['card'])){
     
     
 
-echo  $_SESSION['lineName'];
+// echo  $_SESSION['lineName'];
   header("location: list_of_models.php");
   }
 }
+
 ?>
 
 <!doctype html>
@@ -30,7 +36,7 @@ echo  $_SESSION['lineName'];
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="../node_modules/fontawesome-free-6.2.0-web/css/all.min.css">
     <!-- <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css"> -->
-
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     
     <link rel="stylesheet" href="../css/style.css?v=<?php echo time(); ?>">
     <style>
@@ -53,7 +59,71 @@ echo  $_SESSION['lineName'];
       <link href="../sidebars.css" rel="stylesheet">
 </head>
   <body>
-   
+  <?php
+    
+
+    date_default_timezone_set("Asia/Singapore");
+    
+    if (isset($_POST['changeYear'])){
+        $year =  $_POST['modal_year'];
+        // echo "<script>console.log('$year'); </script>";
+    $_SESSION['chosenYearinWorkingDays'] = $year;
+    $years =  $_SESSION['chosenYearinWorkingDays'];
+    
+    // echo "<script>console.log('$years'); </script>";
+    // echo $_SESSION['chosenYearinWorkingDays'];
+    echo"<script> $(document).ready(function() {
+      $('#updateWorkingDaysModal').modal('show');
+    }); </script> " ;
+    }
+    
+    
+    $tableNameWD="workingdays";
+    $chosenYear = $_SESSION['chosenYearinWorkingDays'];
+    $columnsWD= ['id', 'month','workingdays',$chosenYear];
+    $fetchDataWD = fetch_data_WD($db, $tableNameWD, $columnsWD);
+    
+    
+    function fetch_data_WD($db, $tableNameWD, $columnsWD){
+      // $chosenYear = $_SESSION['chosenYearinWorkingDays'];
+      if($_SESSION['chosenYearinWorkingDays']==""){
+        $year = new DateTime(); 
+        $year  = $year->format('Y'); 
+        $chosenYear = $year;
+      }
+      else{
+        $chosenYear = $_SESSION['chosenYearinWorkingDays'];
+      }
+
+     if(empty($db)){
+      $msg= "Database connection error";
+     }elseif (empty($columnsWD) || !is_array($columnsWD)) {
+      $msg="columns Name must be defined in an indexed array";
+     }elseif(empty($tableNameWD)){
+       $msg= "Table Name is empty";
+    }else{
+    $columnName = implode(", ", $columnsWD);
+    // $query = "SELECT * FROM `model`;";
+    $idModelLine= $_SESSION['lineId'];
+    $query = "SELECT `month`,`$chosenYear` FROM `workingdays`";
+    
+    //  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
+    $result = $db->query($query);
+    if($result== true){ 
+     if ($result->num_rows > 0) {
+        $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $msg= $row;
+     } else {
+        $msg= "No Data Found"; 
+     }
+    }else{
+      $msg= mysqli_error($db);
+    }
+    }
+    return $msg;
+    }
+    
+       ?>
   <nav class="navbar navbar-dark navbar-expand-sm shadow px-0 px-sm-3 sticky-top" style="background-color: #061362;">
     <div class="container-fluid px-3">
       <span class="navbar-brand me-4 	d-none d-lg-block " data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onclick="slideMainContent()">
@@ -99,7 +169,6 @@ echo  $_SESSION['lineName'];
       </div>
     </div>
   </nav>
-
 <?php include "../modals.php" ?>
 
 <!-- sidebar  -->
@@ -108,13 +177,14 @@ echo  $_SESSION['lineName'];
 <?php include "./mainContent.php" ?>
 
 <!-- <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script> -->
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" ></script> -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" ></script> -->
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <script src="../sidebars.js"></script> 
     <script src="../js/userHomePage.js"></script> 
+
 <script>
 
 </script>

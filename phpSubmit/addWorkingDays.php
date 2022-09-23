@@ -4,10 +4,10 @@ date_default_timezone_set("Asia/Singapore");
 
 if (isset($_POST['addworkingDays'])){
     
-$modal_year = $_POST['modal_year'];
+$modal_year = $_POST['modal_year2'];
 
-$sqlinsertModel= "ALTER TABLE workingdays ADD `$modal_year` int(20);";
-mysqli_query($con, $sqlinsertModel);
+// $sqlinsertModel= "ALTER TABLE workingdays ADD `$modal_year` int(20);";
+// mysqli_query($con, $sqlinsertModel);
 
 for($i=1; $i<=12; $i++){
     $workingDaysValue = $_POST['day'.$i];

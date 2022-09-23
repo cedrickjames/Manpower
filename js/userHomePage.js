@@ -145,4 +145,7 @@ document.getElementById(id).click();
 
    function enableWorkingDaysEdit(name){
     document.querySelectorAll('input').forEach(element => element.disabled = false);
+    document.getElementById('year1').style.display="none";
+    document.getElementById('year2').style.display="block";
+
    }
