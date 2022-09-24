@@ -8,6 +8,13 @@ $modal_year = $_POST['modal_year2'];
 
 // $sqlinsertModel= "ALTER TABLE workingdays ADD `$modal_year` int(20);";
 // mysqli_query($con, $sqlinsertModel);
+$selectColumn = "SHOW COLUMNS FROM `workingdays` LIKE '$modal_year'";
+$resultColumn = mysqli_query($con, $selectColumn);
+$exists = (mysqli_num_rows($resultColumn))?TRUE:FALSE;
+if(!$exists) {
+$sqlinsertModel= "ALTER TABLE workingdays ADD `$modal_year` int(20);";
+ mysqli_query($con, $sqlinsertModel);
+}
 
 for($i=1; $i<=12; $i++){
     $workingDaysValue = $_POST['day'.$i];
@@ -66,7 +73,16 @@ else if($i==12){
 
     // echo 'day'.$i;
 }
-header("Location: ../userSide/list_of_models.php");
+// header("Location: ../userSide/list_of_models.php");
+$location = $_SESSION['location'];
+if($location == "list_of_models"){
+    header("Location: ../userSide/list_of_models.php");
+}
+else{
+    header("Location: ../userSide/userHomePage.php");
+
+}
+
 
 }
 

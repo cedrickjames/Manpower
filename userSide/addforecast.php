@@ -7,12 +7,12 @@
   <div class="form-floating col-md-6">
     
     <div class="form-floating">
-  <input type="number" class="form-control" placeholder="Enter year" id="floatingTextarea"></input>
+  <input type="number" class="form-control" onkeyup="chooseWorkingDays()" value="<?php $year = new DateTime(); $year  = $year->format('Y'); echo $year; ?>"placeholder="Enter year" id="chosenYearForecast"></input>
   <label for="floatingTextarea">Year</label>
 </div>
   </div>
   <div class="form-floating col-md-6">
-  <select id="inputMonth" class="form-select">
+  <select id="inputMonth" onchange="chooseWorkingDays()" class="form-select">
       <option selected disabled>Choose...</option>
       <option>January</option>
       <option>February</option>

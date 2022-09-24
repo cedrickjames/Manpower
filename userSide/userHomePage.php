@@ -5,7 +5,7 @@ $db= $con;
 date_default_timezone_set("Asia/Singapore");
 $year = new DateTime(); $year  = $year->format('Y'); 
 $_SESSION['chosenYearinWorkingDays'] = $year;
-
+$_SESSION['location']="userHomePage";
 if(isset($_POST['card'])){
   $_SESSION['lineId'] = $_POST["lineID"];
   $_SESSION['show'] = "true";
@@ -22,6 +22,7 @@ if(isset($_POST['card'])){
 
 // echo  $_SESSION['lineName'];
   header("location: list_of_models.php");
+  $_SESSION['location']="list_of_models";
   }
 }
 
@@ -94,7 +95,7 @@ if(isset($_POST['card'])){
       else{
         $chosenYear = $_SESSION['chosenYearinWorkingDays'];
       }
-
+      
      if(empty($db)){
       $msg= "Database connection error";
      }elseif (empty($columnsWD) || !is_array($columnsWD)) {
@@ -104,7 +105,6 @@ if(isset($_POST['card'])){
     }else{
     $columnName = implode(", ", $columnsWD);
     // $query = "SELECT * FROM `model`;";
-    $idModelLine= $_SESSION['lineId'];
     $query = "SELECT `month`,`$chosenYear` FROM `workingdays`";
     
     //  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';

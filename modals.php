@@ -1,3 +1,7 @@
+
+<?php
+
+?>
 <!-- Modal -->
 <div class="modal fade" id="addLineModal" tabindex="-1" aria-labelledby="addLineLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -160,7 +164,18 @@
           <div class="col col-form">
             
             
-              <form action="userHomePage.php" method="POST">
+              <form action="<?php 
+              $location = $_SESSION['location'];
+if($location == "list_of_models"){
+    echo "list_of_models.php";
+}
+else{
+  echo "userHomePage.php";
+
+
+}
+
+ ?>" method="POST">
               <div class="input-group mb-3"  id="year1">
               
               <input type="number" name="modal_year" class="form-control" id="InputYear" placeholder="Year "
@@ -179,7 +194,14 @@
     <form method="POST" action="../phpSubmit/addWorkingDays.php" name="workingDays" enctype="multipart/form-data" class="m-3">
         <div class="form-floating mb-3" id="year2" style="display: none">
                 <input type="number" name="modal_year2" class="form-control" id="InputYear" placeholder="Line Name"
-                  value="<?php// $year = new DateTime(); $year  = $year->format('Y'); echo $year; ?>">
+                value="<?php
+                  if($_SESSION['chosenYearinWorkingDays']==""){
+                    $year = new DateTime(); $year  = $year->format('Y'); echo $year; 
+                  }
+                  else{
+                    echo $_SESSION['chosenYearinWorkingDays'];
+                  }
+                  ?>">
                 <label for="InputYearName">Year</label>
               </div>
               <table class="table table-striped table-hover" style="width:  100%" id="listOfModels"
