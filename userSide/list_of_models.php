@@ -131,6 +131,9 @@ else if($month =="December"){
 
     
     <link rel="stylesheet" href="../css/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="../node_modules/DataTables/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="../node_modules/DataTables/Responsive-2.3.0/css/responsive.dataTables.min.css"/>
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -272,6 +275,9 @@ else if($month =="December"){
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" ></script> -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" ></script> -->
+
+    <script type="text/javascript" src="../node_modules/DataTables/datatables.min.js"></script>
+    <script type="text/javascript" src="../node_modules/DataTables/Responsive-2.3.0/js/dataTables.responsive.min.js"></script>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <script src="../sidebars.js"></script> 

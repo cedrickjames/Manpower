@@ -1,3 +1,6 @@
+
+
+
 function showTableForModel(id, Linename){
 // document.getElementById("tableForModel").style.display=null;
 // document.getElementById("cardholder").style.display="none";
@@ -35,14 +38,24 @@ function hideForcast(){
   document.getElementById("bcModel").style.display="flex";
 
 }
-function showFormAddForecast(id, name){
-
+function showFormAddForecast(id, name,japan,gpi,actualTime, numberOfAssign){
+document.getElementById("searchInput").style.display="none"
   document.getElementById("bcModel").style.display="none";
 document.getElementById("tableForModel").style.display="none";
 document.getElementById("gbForecast").style.display="flex";
 document.getElementById("forecastForm").style.display="block";
 document.getElementById("nameOfTheModel").innerHTML=name;
 document.getElementById("modelIdContainer").value=id;
+document.getElementById("inputModel").value=name;
+document.getElementById("inputJpnSTU").value=japan;
+document.getElementById("inputGpiSTU").value=gpi;
+document.getElementById("inputActualTime").value=actualTime;
+document.getElementById("inputActualManpower").value=numberOfAssign;
+
+
+
+
+
 
 
 }
@@ -149,3 +162,274 @@ document.getElementById(id).click();
     document.getElementById('year2').style.display="block";
 
    }
+
+
+   function compute(){
+    //TOTAL GPI TARGET
+    var gpiStu = document.getElementById("inputGpiSTU").value;
+    var projection = document.getElementById("inputProjQnty").value;
+    var tot=parseFloat(gpiStu) * parseFloat(projection);
+
+    if(projection=="")
+    {
+           document.getElementById("inputTotGpiTarget").value =  0;
+    }
+    else
+    {
+        document.getElementById("inputTotGpiTarget").value =  tot.toFixed(2);
+       //END GPI TARGET
+    }
+
+
+    //TOTAL ACTUAL TIME
+    var actime = document.getElementById("inputActualTime").value;
+    var projection2 = document.getElementById("inputProjQnty").value;
+    var tot2=parseFloat(actime) * parseFloat(projection2);
+
+    document.getElementById("inputTotActual").value =  tot2.toFixed(2);
+
+    //END ACTUAL TIME
+
+
+    //forecast actual
+    
+    var noDays=document.getElementById("inputdaysOfWork").value;
+    var totactual=document.getElementById("inputTotActual").value;
+    var tot3=(parseFloat(totactual)/435)/parseFloat(noDays);
+ 
+    document.getElementById("inputForAct").value =  tot3.toFixed(2);
+
+    //end of forecast actual
+
+    //forecast manpower
+
+    var totgpitarget=document.getElementById("inputTotGpiTarget").value;
+    var tot4=(parseFloat(totgpitarget)/435)/parseFloat(noDays)
+    document.getElementById("inputMFGT").value =  tot4.toFixed(2);
+
+    //end forecast manpower
+
+
+    //amount
+    var manPower=document.getElementById("inputActualManpower").value;
+    var tot5=parseFloat(manPower)-parseFloat(tot3);
+    document.getElementById("inputFinalForecast").value =  tot5.toFixed(2);
+    
+    //end of amount
+   }
+   function editcompute(){
+    //TOTAL GPI TARGET
+    var gpiStu = document.getElementById("editinputGpiSTU").value;
+    var projection = document.getElementById("editinputProjQnty").value;
+    var tot=parseFloat(gpiStu) * parseFloat(projection);
+
+    if(projection=="")
+    {
+           document.getElementById("editinputTotGpiTarget").value =  0;
+    }
+    else
+    {
+        document.getElementById("editinputTotGpiTarget").value =  tot.toFixed(2);
+       //END GPI TARGET
+    }
+
+
+    //TOTAL ACTUAL TIME
+    var actime = document.getElementById("editinputActualTime").value;
+    var projection2 = document.getElementById("editinputProjQnty").value;
+    var tot2=parseFloat(actime) * parseFloat(projection2);
+
+    document.getElementById("editinputTotActual").value =  tot2.toFixed(2);
+
+    //END ACTUAL TIME
+
+
+    //forecast actual
+    
+    var noDays=document.getElementById("editinputdaysOfWork").value;
+    var totactual=document.getElementById("editinputTotActual").value;
+    var tot3=(parseFloat(totactual)/435)/parseFloat(noDays);
+ 
+    document.getElementById("editinputForAct").value =  tot3.toFixed(2);
+
+    //end of forecast actual
+
+    //forecast manpower
+
+    var totgpitarget=document.getElementById("editinputTotGpiTarget").value;
+    var tot4=(parseFloat(totgpitarget)/435)/parseFloat(noDays)
+    document.getElementById("editinputMFGT").value =  tot4.toFixed(2);
+
+    //end forecast manpower
+
+
+    //amount
+    var manPower=document.getElementById("editinputActualManpower").value;
+    var tot5=parseFloat(manPower)-parseFloat(tot3);
+    document.getElementById("editinputFinalForecast").value =  tot5.toFixed(2);
+    
+    //end of amount
+   }
+   function computeGpiStu(){
+                      
+console.log("computed");
+    jpstu= document.getElementById("InputJPNSTU").value;
+  
+     tot=parseFloat(jpstu) * parseFloat(1.3);
+          
+     if(jpstu==""){
+      document.getElementById("InputGPISTU").value ="";
+     }else{
+
+     document.getElementById("InputGPISTU").value = tot.toFixed(2);
+
+
+  }
+     
+ }
+
+
+ $('#lineselect').change(function() {
+  var $options = $('#machineSelect')
+  .val('')
+  .find('option')
+  .show();
+  if (this.value != '0')
+  $options
+  .not('[data-val="' + this.value + '"], [data-val="one"]')
+  .hide();
+  $('#machineSelect option:eq(0)').prop('selected', true)
+  // console.log("asd");
+
+  })
+
+  $('#lineselect2').change(function() {
+    var $options = $('#machineSelect2')
+    .val('')
+    .find('option')
+    .show();
+    if (this.value != '0')
+    $options
+    .not('[data-val="' + this.value + '"], [data-val="one"]')
+    .hide();
+    $('#machineSelect2 option:eq(0)').prop('selected', true)
+    // console.log("asd");
+  
+    })
+  // function filterOptions(){
+  //   var $options = $('#machineSelect')
+  //   .val('')
+  //   .find('option')
+  //   .show();
+  //   if (this.value != '0')
+  //   $options
+  //   .not('[data-val="' + this.value + '"],[data-val=""]')
+  //   .hide();
+  //   console.log("asd");
+  // }
+
+
+  
+ function filterMachine(){
+  var checkBox = document.getElementById("machineSelect").value;
+
+            var table = document.getElementById('manpowerBody');
+            let tr = table.querySelectorAll('tr');
+            
+            for(let index=0; index < tr.length;index++){
+                let val = tr[index].getElementsByTagName('td')[6];
+                if(val.innerHTML.indexOf(checkBox)> -1){
+                    tr[index].style.display='';
+        
+                }
+                else{
+                    tr[index].style.display='none';
+                }
+            }
+        
+ }
+ function filterMachineAll(){
+  var checkBox = "";
+
+  var table = document.getElementById('manpowerBody');
+  let tr = table.querySelectorAll('tr');
+  
+  for(let index=0; index < tr.length;index++){
+      let val = tr[index].getElementsByTagName('td')[6];
+      if(val.innerHTML.indexOf(checkBox)> -1){
+          tr[index].style.display='';
+
+      }
+      else{
+          tr[index].style.display='none';
+      }
+  }
+
+ }
+ $(document).ready(function () {
+  
+  $('#forecastTableList').DataTable(  {
+    "columnDefs": [
+      { "width": "1%", "targets": 9 },
+      {"className": "dt-center", "targets": "_all"}
+    ],
+    responsive: true,
+    
+  }   );
+
+});
+$(document).ready(function () {
+  
+  $('#manpowerTable').DataTable(  {
+    responsive: true, 
+  });
+});
+
+function showAddForecast(){
+  var forecastTable = document.getElementById("forecastTable");
+  forecastTable.classList.add("d-none");
+
+  var forecastCard= document.getElementById("cardholder");
+  forecastCard.classList.remove("d-none");
+}
+  
+
+const deleteForecast = document.getElementById('deleteForecast')
+deleteForecast.addEventListener('show.bs.modal', event => {
+  // Button that triggered the modal
+  const button = event.relatedTarget
+  // Extract info from data-bs-* attributes
+  const forecastId = button.getAttribute('data-bs-ForecastId')
+  // If necessary, you could initiate an AJAX request here
+  // and then do the updating in a callback.
+  //
+  // Update the modal's content.
+  const forecastIDTitle = deleteForecast.querySelector('#forecastIDTitle');
+  const forecastID = deleteForecast.querySelector('#forecastID');
+  forecastID.value = forecastId;
+  forecastIDTitle.innerHTML = forecastId;
+})
+
+
+function passForecastDataToEdit(forecast_Id, line, model, projection_Qty, gpiSTU, japanSTU, actual_time, total_gpi_target, total_actual, mp_forecast_gpi_target,actualForcast, total_manpower_needed, inputdaysOfWork, month, year){
+  document.getElementById('EditForecastIdContainer').value=forecast_Id;
+  document.getElementById('editchosenYearForecast').value=year;
+  document.getElementById('editinputMonth').value=month;
+  document.getElementById('editinputLine').value=line;
+  document.getElementById('editinputModel').value=model;
+  document.getElementById('editinputProjQnty').value=projection_Qty;
+  document.getElementById('editinputdaysOfWork').value=inputdaysOfWork;
+  document.getElementById('editinputActualManpower').value=
+  document.getElementById('editinputJpnSTU').value=japanSTU
+  document.getElementById('editinputGpiSTU').value=gpiSTU;
+  document.getElementById('editinputActualTime').value=actual_time;
+  document.getElementById('editinputTotGpiTarget').value=total_gpi_target;
+  document.getElementById('editinputTotActual').value=total_actual;
+  document.getElementById('editinputMFGT').value=mp_forecast_gpi_target;
+  document.getElementById('editinputFinalForecast').value=total_manpower_needed;
+  document.getElementById('editinputForAct').value=actualForcast;
+
+
+
+}
+

@@ -2,66 +2,37 @@
 include ("../connection.php");
 $db= $con;
 
-$tableNameModel="model";
-$columnsModel= ['model_id', 'model_name','model_line','id_model_line','japan_stu','gpi_stu', 'actual_time'];
-$fetchDataModel = fetch_data_model($db, $tableNameModel, $columnsModel);
+include "./fetch_data.php";
 
-
-function fetch_data_model($db, $tableNameModel, $columnsModel){
- if(empty($db)){
-  $msg= "Database connection error";
- }elseif (empty($columnsModel) || !is_array($columnsModel)) {
-  $msg="columns Name must be defined in an indexed array";
- }elseif(empty($tableNameModel)){
-   $msg= "Table Name is empty";
-}else{
-$columnName = implode(", ", $columnsModel);
-// $query = "SELECT * FROM `model`;";
-$idModelLine= $_SESSION['lineId'];
-$query = "SELECT * FROM `model` WHERE `id_model_line` = '$idModelLine';";
-
-//  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
-$result = $db->query($query);
-if($result== true){ 
- if ($result->num_rows > 0) {
-    $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
-    $msg= $row;
- } else {
-    $msg= "No Data Found"; 
- }
-}else{
-  $msg= mysqli_error($db);
-}
-}
-return $msg;
-}
 ?>
 <div class="main-content " id="mainContent">
   <div class="tab-content " id="v-pills-tabContent">
     <div class="tab-pane fade show active " id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"
       tabindex="0">
+      <form action="userHomePage.php" method="POST">
+        <div class="row row-cols-1 row-cols-md-2 g-2" id="bcModel">
+          <div class="col goback">
+            <!-- <input type="text" class="form-control" placeholder="First name" aria-label="First name"> -->
+            <button type="submit" class="form-control btn btn-outline-primary text-start" name="goBack" id="goBack">
+              <span><i class="fa-solid fa-arrow-left"></i></span>
+              Go back</button>
 
-      <div class="row row-cols-1 row-cols-md-2 g-2" id="bcModel">
-        <div class="col goback">
-          <!-- <input type="text" class="form-control" placeholder="First name" aria-label="First name"> -->
-          <a type="button" href="./userHomePage.php" class="form-control btn btn-outline-primary text-start" id="goBack">
-            <span><i class="fa-solid fa-arrow-left"></i></span>
-            Go back</a>
-
+          </div>
+          <div class=" searchInput col">
+            <input type="search" class="form-control" id="filterbox" placeholder=" " onkeyup="getSelectValueDaily();">
+          </div>
         </div>
-        <div class=" searchInput col">
-          <input type="search" class="form-control" id="filterbox" placeholder=" " onkeyup="getSelectValueDaily();">
-        </div>
-      </div>
+      </form>
       <div class="row row-cols-1 row-cols-md-2 g-2" id="gbForecast" style="display: none">
         <div class="col goback">
           <!-- <input type="text" class="form-control" placeholder="First name" aria-label="First name"> -->
-          <button type="button" onclick="hideForcast();" class="form-control btn btn-outline-primary text-start" id="goBack">
+          <button type="button" onclick="hideForcast();" class="form-control btn btn-outline-primary text-start"
+            id="goBack">
             <span><i class="fa-solid fa-arrow-left"></i></span>
             Go back</button>
 
         </div>
-        <div class=" searchInput col">
+        <div class=" searchInput col" id="searchInput">
           <input type="search" class="form-control" id="filterbox" placeholder=" " onkeyup="getSelectValueDaily();">
         </div>
       </div>
@@ -84,8 +55,7 @@ return $msg;
 
       </div>
     </div>
-    <div class="tab-pane " id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">2
-    </div>
+    <?php include "./list_of_manpower.php" ;?>
     <div class="tab-pane " id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">3
     </div>
     <div class="tab-pane " id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">4

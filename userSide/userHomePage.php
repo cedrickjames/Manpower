@@ -6,6 +6,9 @@ date_default_timezone_set("Asia/Singapore");
 $year = new DateTime(); $year  = $year->format('Y'); 
 $_SESSION['chosenYearinWorkingDays'] = $year;
 $_SESSION['location']="userHomePage";
+
+$_SESSION['lineId'] = "";
+$_SESSION['showTable'] = "";
 if(isset($_POST['card'])){
   $_SESSION['lineId'] = $_POST["lineID"];
   $_SESSION['show'] = "true";
@@ -25,7 +28,16 @@ if(isset($_POST['card'])){
   $_SESSION['location']="list_of_models";
   }
 }
+if(isset($_POST['addForecastBtn'])){
+  $_SESSION['showTable'] = "d-none";
+  // echo "<script> console.log('skdj') ;showAddForecast();</script>";
+}
+if(isset($_POST['goBack'])){
 
+  $_SESSION['showTable'] = "d-none";
+  // header("location: userHomePage.php");
+  // echo "<script> console.log('skdj') ;showAddForecast();</script>";
+}
 ?>
 
 <!doctype html>
@@ -40,6 +52,16 @@ if(isset($_POST['card'])){
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     
     <link rel="stylesheet" href="../css/style.css?v=<?php echo time(); ?>">
+    <!-- <link rel="stylesheet" type="text/css" href="../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.css"> -->
+    <link rel="stylesheet" type="text/css" href="../node_modules/DataTables/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../node_modules/DataTables/Responsive-2.3.0/css/responsive.dataTables.min.css"/>
+    <script src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.min.css">
+<!-- <script type="text/javascript" charset="utf8" src="../node_modules/datatables.net-bs5/js/dataTables.bootstrap5.js"></script> -->
+
+
+
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -177,9 +199,13 @@ if(isset($_POST['card'])){
 <?php include "./mainContent.php" ?>
 
 <!-- <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script> -->
-
+<!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" ></script> -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" ></script> -->
+
+
+    <script type="text/javascript" src="../node_modules/DataTables/datatables.min.js"></script>
+    <script type="text/javascript" src="../node_modules/DataTables/Responsive-2.3.0/js/dataTables.responsive.min.js"></script>
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <script src="../sidebars.js"></script> 

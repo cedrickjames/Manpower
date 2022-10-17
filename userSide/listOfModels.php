@@ -26,10 +26,13 @@
                                    $JapanSTU = $data['japan_stu'];
                                    $gpiSTU = $data['gpi_stu'];
                                    $actualTime = $data['actual_time'];
- 
+                                    
+                                   $selectEmployee = "SELECT * FROM `employees` WHERE `assign` = '$modelName'";
+                                   $result = mysqli_query($con, $selectEmployee);
+                                   $numrowspass = mysqli_num_rows($result);
 
                                  ?>
-    <tr onclick="showFormAddForecast('<?php echo $model_id;?>', '<?php echo $modelName;?>');">
+    <tr onclick="showFormAddForecast('<?php echo $model_id;?>', '<?php echo $modelName;?>','<?php echo $JapanSTU;?>','<?php echo $gpiSTU;?>','<?php echo $actualTime;?>','<?php echo $numrowspass;?>');">
         <td><?php echo $sn; ?></td>
         <td><?php echo $modelName; ?></td>
         <td><?php echo $JapanSTU; ?></td>

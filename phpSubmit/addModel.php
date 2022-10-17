@@ -16,6 +16,7 @@ $sqlinsertModel= "INSERT INTO `model`(`model_name`, `model_line`, `id_model_line
 mysqli_query($con, $sqlinsertModel);
 // $_SESSION['location']="list_of_models";
 
+header("Location: ../userSide/list_of_models.php");
 }
 
 ?>
