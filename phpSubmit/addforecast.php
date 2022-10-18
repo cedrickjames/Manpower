@@ -26,7 +26,7 @@ $inputFinalForecast = $_POST['inputFinalForecast'];
 
 
 
-$sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`) VALUES ('$chosenYearForecast','$inputMonth','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork')";
+$sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`,`actual_manpower`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`) VALUES ('$chosenYearForecast','$inputMonth','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputActualManpower','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork')";
 mysqli_query($con, $sqlinsertForecast);
 // $_SESSION['location']="list_of_models";
 

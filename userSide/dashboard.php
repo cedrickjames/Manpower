@@ -1,4 +1,131 @@
+<?php
+session_start();
+include ("../connection.php");
 
+
+$year='';
+
+$dateNow = new DateTime();
+$monthNow  = $dateNow->format('m'); 
+if($monthNow == "01" || $monthNow == "02" || $monthNow == "03" || $monthNow == "1" || $monthNow == "2" || $monthNow == "3")
+{
+  $dateNow->modify('last year');
+  $year = $dateNow->format('Y'); 
+  $_SESSION['year1']=$year;
+}
+else{
+  $year  = $dateNow->format('Y');
+  $_SESSION['year1']=$year; 
+}
+
+$dateNow2 = new DateTime();
+$monthNow2  = $dateNow2->format('m'); 
+if($monthNow2 == "01" || $monthNow2 == "02" || $monthNow2 == "03" || $monthNow2 == "1" || $monthNow2 == "2" || $monthNow2 == "3")
+{
+  $year2  = $dateNow2->format('Y'); 
+}
+else{
+  $dateNow2->modify('next year');
+  $year2  = $dateNow2->format('Y'); 
+  $_SESSION['year2']=$year2; 
+}
+
+
+
+if (isset($_POST['changeFY']))
+{
+$fyear1 = $_POST['fyear1'];
+$_SESSION['year1'] = $fyear1;
+$year = $_SESSION['year1'];
+
+$fyear2 = $_POST['fyear2'];
+$_SESSION['year2'] = $fyear2;
+$year2 = $_SESSION['year2'];
+}
+
+
+
+$startMonth = "$year-03-01";
+$YEAR = new DateTime();
+$YEAR  = $YEAR->format('Y');
+
+$MONTH = new DateTime();
+$MONTH  = $MONTH->format('F');
+
+
+$forecastActual = array();
+$gpiTarget = array();
+$actualManpower = array();
+$manpowerRequest = array();
+
+for($i=12; $i>=1; $i--){
+  $MONTH = new DateTime($startMonth);
+  $MONTH->modify('next month');
+  $monthName  = $MONTH->format('F');
+  $year  = $MONTH->format('Y');
+
+  $date  = $MONTH->format('Y-m-d');
+
+  $selectTotal = "SELECT SUM(`forecast_actual`) as 'TOTAL' FROM `forecast` WHERE `year` = '$year' and `month`='$monthName';";
+  $result1 = mysqli_query($con, $selectTotal);
+  while($row = mysqli_fetch_assoc($result1)) {
+                       
+     $total = $row["TOTAL"];
+     if($total==null){
+      $total=0;
+     }
+     array_push($forecastActual, $total);
+  }
+  $selectTotalGPi = "SELECT SUM(`mp_forecast_gpi_target`) as 'TOTAL' FROM `forecast` WHERE `year` = '$year' and `month`='$monthName';";
+  $resultgpi = mysqli_query($con, $selectTotalGPi);
+  while($row = mysqli_fetch_assoc($resultgpi)) {
+                       
+     $totalgpi = $row["TOTAL"];
+     if($totalgpi==null){
+      $totalgpi=0;
+     }
+     array_push($gpiTarget, $totalgpi);
+  }
+  $selectTotalActMan = "SELECT SUM(`actual_manpower`) as 'TOTAL' FROM `forecast` WHERE `year` = '$year' and `month`='$monthName';";
+  $resultActMan = mysqli_query($con, $selectTotalActMan);
+  while($row = mysqli_fetch_assoc($resultActMan)) {
+                       
+     $totalActMan = $row["TOTAL"];
+     if($totalActMan==null){
+      $totalActMan=0;
+     }
+     array_push($actualManpower, $totalActMan);
+  }
+  
+  $selectTotalMan = "SELECT SUM(`total_manpower_needed`) as 'TOTAL' FROM `forecast` WHERE `year` = '$year' and `month`='$monthName';";
+  $resulttotalMan = mysqli_query($con, $selectTotalMan);
+  while($row = mysqli_fetch_assoc($resulttotalMan)) {
+                       
+     $totalmanReq = $row["TOTAL"];
+     if($totalmanReq==null){
+      $totalmanReq=0;
+     }
+     array_push($manpowerRequest, $totalmanReq);
+  }
+
+$startMonth = $date;
+}
+// print_r($forecastActual);
+
+// $rowsDate = mysqli_fetch_all($result1, MYSQLI_ASSOC);
+
+// $forecastActual = array_map(function ($item) {
+//     return $item['forecast_actual'];
+// }, $rowsDate);
+// $actualManpower = array_map(function ($item) {
+//   return $item['actual_manpower'];
+// }, $rowsDate);
+
+// $gpiTarget = array_map(function ($item) {
+//   return $item['mp_forecast_gpi_target'];
+// }, $rowsDate);
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -159,42 +286,68 @@
   </div>
 </div>
 
-<div class="main-content" id="mainContent" >
-  <div class="container text-center balance-container p-2">
-    <div class="row align-items-start">
-      <div class="col">
-        <h2 class="fw-bolder text-light " >Graph of Manpower as of FY: <span style="color: pink">2022-2023</span></h2>
+<div class="main-content py-4" id="mainContent" >
+  <div class="container text-center balance-container p-4">
+    <div class="row h-100" >
+      <div class="col-6">
+        <h2 class="fw-bolder text-light " >Graph of Manpower as of FY: <span style="color: pink"><?php
+                $dateNow = new DateTime();
+                $monthNow  = $dateNow->format('m'); 
+                if($monthNow == "01" || $monthNow == "02" || $monthNow == "03" || $monthNow == "1" || $monthNow == "2" || $monthNow == "3")
+                {
+                  $dateNow->modify('last year');
+                  $year  = $dateNow->format('Y'); 
+                }
+                else{
+                  $year  = $dateNow->format('Y'); 
+                }
+                  echo $_SESSION['year1']; 
+               
+               ?>-<?php
+               $dateNow = new DateTime();
+               $monthNow  = $dateNow->format('m'); 
+               if($monthNow == "01" || $monthNow == "02" || $monthNow == "03" || $monthNow == "1" || $monthNow == "2" || $monthNow == "3")
+               {
+                 $year  = $dateNow->format('Y'); 
+               }
+               else{
+                 $dateNow->modify('next year');
+                 $year  = $dateNow->format('Y'); 
+               }
+               echo $_SESSION['year2']; 
+              
+              ?></span></h2>
       </div>
-      <div class="col">
+
+      <div class="col-6">
         <div  class="row g-3">
-          <div class="col-md-6">
-            <input type="number" class="form-control" onkeyup="chooseWorkingDays()" value="<?php $year = new DateTime(); $year  = $year->format('Y'); echo $year; ?>"placeholder="Enter year" name="editchosenYearForecast" id="editchosenYearForecast"></input>
-          </div>
-          <div class="col-md-6">
-            <select id="editinputMonth" name="editinputMonth" onchange="chooseWorkingDays()" class="form-select">
-              <option selected disabled>Choose...</option>
-              <option>January</option>
-              <option>February</option>
-              <option>March</option>
-              <option>April</option>
-              <option>May</option>
-              <option>June</option>
-              <option>July</option>
-              <option>August</option>
-              <option>September</option>
-              <option>October</option>
-              <option>November</option>
-              <option>December</option>
-            </select>
-          </div>
+          <div class="col">
+          <form action="dashboard.php" method="POST">
+            <div class="input-group mb-3">
+        
+               <input type="number" name="fyear1" class="form-control" onchange="addYear();" value="<?php
+                echo $_SESSION['year1']; 
+               
+               ?>"placeholder="Enter year"  id="fsyear1">
+               <span class="input-group-text">to</span>
+               <input type="number" onchange="lessYear();" name="fyear2" id="fsyear2" class="form-control" placeholder="Server"value="<?php
+
+                echo $_SESSION['year2']; 
+               
+               ?>" aria-label="Server">
+               <button type="submit" name="changeFY" class="btn btn-warning">Submit</button>
+          
+              </div>
+              </form>
+            </div>
+    
         </div> 
       </div>
+      <div class="col-12">
+        <canvas class="my-4 chartjs-render-monitor" id="myChart"  ></canvas>
     </div>
-    <div class="row align-items-center">
-      <div class="col wrapper">
-        <canvas class="my-4 chartjs-render-monitor" id="myChart" width="1538" height="649" style="display: block; width: 1538px; height: 649px;"></canvas>
-      </div>
     </div>
+ 
   </div>
 </div>
 
@@ -210,12 +363,137 @@
 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <script src="../sidebars.js"></script> 
+    <script>
+ const forecastActual = <?php echo json_encode($forecastActual) ?>;
+ const gpiTarget = <?php echo json_encode($gpiTarget) ?>;
+ const manpowerRequest = <?php echo json_encode($manpowerRequest) ?>;
+ const actualManpower = <?php echo json_encode($actualManpower) ?>;
+
+const labels = [
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+    'January',
+    'February',
+    'March',
+
+
+  ];
+  
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'Actual Forecast',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: forecastActual,
+      pointBackgroundColor: 'white',
+      pointBorderColor: 'white',
+      pointBorderWidth: 5,
+      lineTension: 0,
+      borderWidth: 4,
+      pointBackgroundColor: 'rgb(255, 99, 132)'
+    },
+    {
+        label: 'Actual Manpower',
+        backgroundColor: 'rgb(255, 251, 6)',
+        borderColor: 'rgb(255, 251, 6)',
+        data: actualManpower,
+        pointBackgroundColor: 'white',
+        pointBorderColor: 'white',
+        pointBorderWidth: 5,
+        lineTension: 0,
+        borderWidth: 4,
+        pointBackgroundColor: 'rgb(255, 251, 6)'
+      },
+      {
+        label: 'GPI Target',
+        backgroundColor: 'rgb(6, 255, 39)',
+        borderColor: 'rgb(6, 255, 39)',
+        data: gpiTarget,
+        pointBackgroundColor: 'white',
+        pointBorderColor: 'white',
+        pointBorderWidth: 5,
+        lineTension: 0,
+        borderWidth: 4,
+        pointBackgroundColor: 'rgb(6, 255, 39)'
+      },
+      {
+        label: 'Manpower Needed',
+        backgroundColor: '#faab00',
+        borderColor: '#faab00',
+        data: manpowerRequest,
+        pointBackgroundColor: 'white',
+        pointBorderColor: 'white',
+        pointBorderWidth: 5,
+        lineTension: 0,
+        borderWidth: 4,
+        pointBackgroundColor: '#faab00'
+      }
+    ],
+   
+    
+  };
+  
+
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+          maintainAspectRatio: false,
+                  plugins: {
+            legend: {
+              labels: {
+                color: "white",  
+                textAlign:"left",
+              },
+               position: "top",
+               align: "start",
+            }
+          },
+          scales: {
+                        y:{
+                ticks:{
+                    color: 'rgb(255, 99, 132)',
+                },
+                grid:{
+                    color: 'rgb(197, 195, 212)',
+                }
+            },
+            x:{
+                ticks:{
+                    color: 'rgb(255, 99, 132)',
+                },
+                grid:{
+                    color: 'rgb(197, 195, 212)',
+                }
+            },
+        
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              },
+              grid:{
+                color: 'rgb(197, 195, 212)',
+                  },
+            }]
+          },
+       
+        }
+      });
+
+</script>
     <script src="../js/dashboard.js"></script> 
     <script src="../js/userHomePage.js"></script> 
 
 
-<script>
 
-</script>
 </body>
 </html>
