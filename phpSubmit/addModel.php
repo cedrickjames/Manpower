@@ -12,11 +12,11 @@ $InputGPISTU = $_POST['gpi_stu'];
 $InputActualTime = $_POST['actual_time'];
 
 
-$sqlinsertModel= "INSERT INTO `model`(`model_name`, `model_line`, `id_model_line`, `japan_stu`, `gpi_stu`, `actual_time`) VALUES ('$modal_name','$modal_line_name ','$lineId','$InputJPNSTU','$InputGPISTU','$InputActualTime')";
+$sqlinsertModel= "INSERT INTO `model`(`model_name`, `model_line`, `id_model_line`, `japan_stu`, `gpi_stu`, `actual_time`,`Department`) VALUES ('$modal_name','$modal_line_name ','$lineId','$InputJPNSTU','$InputGPISTU','$InputActualTime','Production1')";
 mysqli_query($con, $sqlinsertModel);
 // $_SESSION['location']="list_of_models";
 
-header("Location: ../userSide/list_of_models.php");
+header("Location: ../Production1/list_of_models.php");
 }
 
 ?>

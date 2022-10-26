@@ -14,7 +14,7 @@
       $msg= "Table Name is empty";
    }else{
    $columnName = implode(", ", $columnsLine);
-   $query = "SELECT * FROM `line`";
+   $query = "SELECT * FROM `line` WHERE `Department` ='Production1';";
   //  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
    $result = $db->query($query);
    if($result== true){ 
@@ -69,6 +69,117 @@
    return $msg;
    }
  
+
+   
+
+
+$monthArray = array();
+$yearArray = array();
+$daysArray = array();
+$January = array();
+$February = array();
+$March = array();
+$April = array();
+$May = array();
+$June = array();
+$July = array();
+$August = array();
+$September = array();
+$October = array();
+$November = array();
+$December = array();
+
+$queryWorkingDays = "SHOW COLUMNS FROM `workingdays` where FIELD != 'id' AND FIELD !='month'AND FIELD !='year'AND FIELD !='working_days';";
+$resultWorkingDays = mysqli_query($con, $queryWorkingDays);
+while($rowDays = mysqli_fetch_assoc($resultWorkingDays)){
+    // array_push($monthArray, $rowDays['month']);
+    array_push($yearArray, $rowDays['Field']);
+    // array_push($daysArray, $rowDays['no_days']);
+}
+$arrlength = count($yearArray);
+
+
+$queryAllWorkingDays = "SELECT * FROM `workingdays`";
+$resultWorkingDaysAll = mysqli_query($con, $queryAllWorkingDays);
+while($rowDaysAll = mysqli_fetch_assoc($resultWorkingDaysAll)){
+  $month = $rowDaysAll['month'];
+if($month =="January"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($January, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+else if($month =="February"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($February, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+else if($month =="March"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($March, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+else if($month =="April"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($April, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+else if($month =="May"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($May, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+else if($month =="June"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($June, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+else if($month =="July"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($July, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+else if($month =="August"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($August, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+else if($month =="September"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($September, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+else if($month =="October"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($October, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+else if($month =="November"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($November, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+else if($month =="December"){
+for($i=0; $i<$arrlength; $i++){
+// echo $yearArray[$i];
+ array_push($December, $rowDaysAll[''.$yearArray[$i].'']);
+}
+}
+}
+
+
+
+
 ?>
 
 
@@ -497,20 +608,20 @@ else{
                 <select class="form-select" name="department" id="department"
                   aria-label="Floating label select example">
                   <option selected>Choose Here...</option>
-                  <option value="Admin">Admin</option>
+                  <!-- <option value="Admin">Admin</option>
                   <option value="Accounting">Accounting</option>
                   <option value="Japanese">Japanese</option>
                   <option value="Parts Inspection">Parts Inspection</option>
                   <option value="Parts Production">Parts Production</option>
                   <option value="PPIC">PPIC</option>
-                  <option value="PPIC-Warehouse">PPIC-Warehouse</option>
-                  <option value="Production 1">Production 1</option>
-                  <option value="Production 2">Production 2</option>
-                  <option value="Production Support">Production Support</option>
+                  <option value="PPIC-Warehouse">PPIC-Warehouse</option> -->
+                  <option value="Production1">Production 1</option>
+                  <option value="Production2">Production 2</option>
+                  <!-- <option value="Production Support">Production Support</option>
                   <option value="Purchasing">Purchasing</option>
-                  <option value="Quality Assurance">Quality Assurance</option>
+                  <option value="Quality Assurance">Quality Assurance</option> -->
                   <option value="Quality Control">Quality Control</option>
-                  <option value="System Kaizen">System Kaizen</option>
+                  <!-- <option value="System Kaizen">System Kaizen</option> -->
 
                 </select>
                 <label for="floatingSelect">Department</label>
@@ -581,3 +692,100 @@ else{
     </div>
   </div>
 </div>
+
+<script>
+                var yearArray = <?php echo json_encode($yearArray); ?>;
+
+                var January = <?php echo json_encode($January); ?>;
+                var February = <?php echo json_encode($February); ?>;
+                var March = <?php echo json_encode($March); ?>;
+                var April = <?php echo json_encode($April); ?>;
+                var May = <?php echo json_encode($May); ?>;
+                var June = <?php echo json_encode($June); ?>;
+                var July = <?php echo json_encode($July); ?>;
+                var August = <?php echo json_encode($August); ?>;
+                var September = <?php echo json_encode($September); ?>;
+                var October = <?php echo json_encode($October); ?>;
+                var November = <?php echo json_encode($November); ?>;
+                var December = <?php echo json_encode($December); ?>;
+
+                var arrayLengthYear = yearArray.length;
+
+  function chooseWorkingDays(){
+    var chosenMonth = document.getElementById("editinputMonth").value;
+    var chosenYear = document.getElementById("editchosenYearForecast").value;
+
+    for(var i = 0; i < arrayLengthYear; i++){
+  // console.log(chosenMonth);
+      if(chosenYear == yearArray[i]){
+        console.log(i);
+        console.log(chosenMonth);
+        if(chosenMonth == "January"){
+           theday = January[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+        else if(chosenMonth == "February"){
+           theday = February[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+        else if(chosenMonth == "March"){
+           theday = March[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+        else if(chosenMonth == "April"){
+           theday = April[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+        else if(chosenMonth == "May"){
+           theday = May[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+        else if(chosenMonth == "June"){
+           theday = June[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+        else if(chosenMonth == "July"){
+           theday = July[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+        else if(chosenMonth == "August"){
+           theday = August[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+        else if(chosenMonth == "September"){
+           theday = September[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+        else if(chosenMonth == "October"){
+           theday = October[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+        else if(chosenMonth == "November"){
+           theday = November[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+        else if(chosenMonth == "December"){
+           theday = December[i];
+          console.log(theday);
+          document.getElementById("editinputdaysOfWork").value=theday;
+        }
+       
+
+      }
+        }
+
+
+  }
+
+</script>

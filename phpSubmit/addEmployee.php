@@ -25,7 +25,7 @@ $sqlinsertEmp= "INSERT INTO `employees`(`emp_id`, `name`, `surname`, `dept`, `co
 mysqli_query($con, $sqlinsertEmp);
 // $_SESSION['location']="list_of_models";
 
-header("Location: ../userSide/manpower.php");
+header("Location: ../Production1/manpower.php");
 }
 
 ?>

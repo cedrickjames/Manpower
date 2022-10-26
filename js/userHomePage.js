@@ -1,5 +1,17 @@
 
+function seePassword() {
+  var checkBox = document.getElementById("seepassword");
+  var password = document.getElementById("passwordSignin");
+  var password1 = document.getElementById("passwordSignin1");
 
+  if (checkBox.checked == true) {
+    password.setAttribute("type", "text");
+    password1.setAttribute("type", "text");
+  } else {
+    password.setAttribute("type", "password");
+    password1.setAttribute("type", "password");
+  }
+}
 
 function showTableForModel(id, Linename){
 // document.getElementById("tableForModel").style.display=null;
@@ -60,6 +72,8 @@ document.getElementById("inputActualManpower").value=numberOfAssign;
 
 }
 var a=0;
+
+
 function showForecastOptions(){
     console.log("Options");
     if(a==0){
@@ -81,6 +95,38 @@ a=0;
     }
 
     
+}
+var b=1;
+function showForecastOptions2(){
+  console.log("Options");
+  if(b==0){
+      document.getElementById("forecastOption2").style.display="block";
+      document.getElementById("forecastOption2").classList.remove("mystyle");
+
+      var element = document.getElementById("dropdownIcon2");
+element.classList.remove("fa-caret-down");
+element.classList.add("fa-caret-up");
+
+b=1;
+  }
+  else{
+      document.getElementById("forecastOption2").style.display="none";
+      var element = document.getElementById("dropdownIcon2");
+      element.classList.remove("fa-caret-up");
+      element.classList.add("fa-caret-down");
+b=0;
+  }
+
+  
+}
+showForecastOptions2();
+
+function hideSidebar(){
+ var side =  document.getElementById("offcanvasExample2");
+ side.classList.remove("show");
+ var backdrop = document.getElementsByClassName("offcanvas-backdrop");
+ backdrop.classList.remove("show");
+
 }
 // const image_input = document.querySelector("#inputImage");
 // function insertPicture(){
@@ -432,4 +478,42 @@ function passForecastDataToEdit(forecast_Id, line, model, projection_Qty, gpiSTU
 
 
 }
+
+
+(function($) {
+
+	"use strict";
+
+	$(".toggle-password").click(function() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+
+})(jQuery);
+
+
+var showsulok = false;
+function showSulok(){
+  if(showsulok == false){
+    var element = document.getElementById("sulok");
+    element.classList.remove("d-none");
+    showsulok=true;
+  }
+  else{
+      var element = document.getElementById("sulok");
+      element.classList.add("d-none");
+      showsulok=false;
+  }
+  
+  var element = document.getElementById("dropdownIcon");
+  element.classList.remove("fa-caret-up");
+  element.classList.add("fa-caret-down");
+}
+
 
