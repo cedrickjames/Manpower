@@ -147,12 +147,12 @@ z-index: 0;
 .initialsOfName{
   height: 100%;
   width: 100%;
-  background-color: #061362;
+  background-color: white;
   border-radius: 50%;
   margin-right: 20px;
   text-align: center;
   vertical-align:middle;
-  color: white;
+  color: #061362;
   font-size: 33px;
   padding: auto 0;
   font-weight:500;
@@ -724,4 +724,7 @@ background-color: rgb(231, 231, 231);
   background-clip: padding-box;
   outline: 0;
   transition: transform .3s ease-in-out;
+}
+.offcanvas-header{
+  background-image: url("../samplePictures/GPI Machine/background for sidebar.png");
 }

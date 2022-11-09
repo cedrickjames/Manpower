@@ -15,14 +15,13 @@ table, th, td {
 <body>
 <table style="border">
   <tr>
-    <th>Line Id</th>
-    <th>Line</th>
-    <th>Model</th>
-    <th>Sub code</th>
-    <th>Japan STU</th>
-    <th>GPI STU</th>
-    <th>Actual Time</th>
-    <th>Department</th>
+    <th>Year</th>
+    <th>Month</th>
+    <th>Day</th>
+    <th>Date</th>
+
+
+
 
 
 
@@ -58,34 +57,32 @@ if(isset($_POST['save_excel_data']))
         {
             if($count > 0)
             {
-                $lineId = $row['0'];
-                $line = $row['1'];
-                $model = $row['2'];
-                $subcode = $row['3'];
-                $japanStu = $row['4'];
-                $GPIStu = $row['5'];
-                $actualTime = $row['6'];
-                $Department = $row['7'];
-                $type = $row['8'];
+    
+                $date = $row['4'];
+// singlebyte strings
+$year = substr($date, 0, 4);
+// multibyte strings
+$month = mb_substr($date, 4, 2);
+$day = mb_substr($date, 6, 2);
+$dueDate = $year.'-'.$month.'-'.$day;
+
+if($month=='11'){
 
 
-                $sqlinsertModel= "INSERT INTO `model`(`model_name`,`subcode`, `model_line`,  `id_model_line`, `japan_stu`, `gpi_stu`, `actual_time`,`Department`,`type`) VALUES ('$model','$subcode','$line','$lineId','$japanStu','$GPIStu','$actualTime','$Department','$type')";
-                mysqli_query($con, $sqlinsertModel);
 				?>
 				<tr>
-    <td><?php echo $lineId?></td>
-    <td><?php echo $line?></td>
-    <td><?php echo $model?></td>
-    <td><?php echo $subcode?></td>
-    <td><?php echo $japanStu?></td>
-    <td><?php echo $GPIStu?></td>
-    <td><?php echo $actualTime?></td>
-    <td><?php echo $Department?></td>
+    <td><?php echo $year?></td>
+    <td><?php echo $month?></td>
+    <td><?php echo $day ?></td>
+    <td><?php echo $dueDate ?></td>
+
+
 
 
   </tr>
 
 				<?php
+}
 				// echo $fullname;
 				// echo "<br>";
 				// echo $email;
@@ -125,7 +122,7 @@ if(isset($_POST['save_excel_data']))
 </body>
 </html>
 
- <form action="index.php" method="POST" enctype="multipart/form-data">
+ <form action="export.php" method="POST" enctype="multipart/form-data">
 
 <input type="file" name="import_file" class="form-control" />
 <button type="submit" name="save_excel_data" class="btn btn-primary mt-3">Import</button>

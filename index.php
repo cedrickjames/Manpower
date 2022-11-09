@@ -1,5 +1,8 @@
 <?php
 session_start(); 
+include ("./connection.php");
+// $sqlinsertTransact2= "INSERT INTO `samplecronjob`(`sample`) VALUES ('sdsdf')";
+// mysqli_query($con, $sqlinsertTransact2);
 ?>
 <!DOCTYPE html>
 <html>

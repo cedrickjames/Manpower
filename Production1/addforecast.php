@@ -44,47 +44,47 @@
 
   </div>
   <div class="form-floating col-md-12">
-    <input type="number" class="form-control" onkeyup="compute()"name="inputProjQnty" id="inputProjQnty"placeholder="Projection quantity">
+    <input type="text" class="form-control" onkeyup="compute()"name="inputProjQnty" id="inputProjQnty"placeholder="Projection quantity">
     <label for="inputQuantity" >Projection Quantity</label>
   </div>
   <div class="form-floating col-md-2  ">
-    <input type="number" class="form-control" name="inputdaysOfWork" id="inputdaysOfWork"placeholder="Projection quantity">
+    <input type="text" class="form-control" name="inputdaysOfWork" id="inputdaysOfWork"placeholder="Projection quantity">
     <label for="inputdaysOfWork" >Days of work</label>
   </div>
   <div class="form-floating col-md-2">
-    <input type="number" class="form-control" name="inputActualManpower"id="inputActualManpower"placeholder="Projection quantity">
+    <input type="text" class="form-control" name="inputActualManpower"id="inputActualManpower"placeholder="Projection quantity">
     <label for="inputActualManpower" >Actual Manpower</label>
   </div>
   <div class="form-floating col-md-3">
-    <input type="number" class="form-control" id="inputJpnSTU" name="inputJpnSTU" placeholder="Projection quantity">
+    <input type="text" class="form-control" id="inputJpnSTU" name="inputJpnSTU" placeholder="Projection quantity">
     <label for="inputJpnSTU" >Japan STU</label>
   </div>
   <div class="form-floating col-md-3">
-    <input type="number" class="form-control" id="inputGpiSTU" name="inputGpiSTU" placeholder="Projection quantity">
+    <input type="text" class="form-control" id="inputGpiSTU" name="inputGpiSTU" placeholder="Projection quantity">
     <label for="inputGpiSTU" >GPI STU</label>
   </div>
   <div class="form-floating col-md-2">
-    <input type="number" class="form-control" id="inputActualTime" name="inputActualTime" placeholder="Projection quantity">
+    <input type="text" class="form-control" id="inputActualTime" name="inputActualTime" placeholder="Projection quantity">
     <label for="inputActualTime" >Actual Time</label>
   </div>
   <div class="form-floating col-md-6">
-    <input type="number" class="form-control" id="inputTotGpiTarget" name="inputTotGpiTarget" placeholder="Projection quantity">
+    <input type="text" class="form-control" id="inputTotGpiTarget" name="inputTotGpiTarget" placeholder="Projection quantity">
     <label for="inputTotGpiTarget" >Total GPI Target</label>
   </div>
   <div class="form-floating col-md-6">
-    <input type="number" class="form-control" id="inputTotActual" name="inputTotActual" placeholder="Projection quantity">
+    <input type="text" class="form-control" id="inputTotActual" name="inputTotActual" placeholder="Projection quantity">
     <label for="inputTotActual" >Total (Actual)</label>
   </div>
   <div class="form-floating col-md-6">
-    <input type="number" class="form-control" step="0.01" id="inputForAct" name="inputForAct" placeholder="Projection quantity">
+    <input type="text" class="form-control" step="0.01" id="inputForAct" name="inputForAct" placeholder="Projection quantity">
     <label for="inputForAct" >Forecast Actual</label>
   </div>
   <div class="form-floating col-md-6">
-    <input type="number" class="form-control" id="inputMFGT" step="0.01" name="inputMFGT" placeholder="Projection quantity">
+    <input type="text" class="form-control" id="inputMFGT" step="0.01" name="inputMFGT" placeholder="Projection quantity">
     <label for="inputMFGT" >MP Forecast GPI Target</label>
   </div>
   <div class="form-floating col-md-12">
-    <input type="number" class="form-control" id="inputFinalForecast"step="0.01" name="inputFinalForecast"  placeholder="Projection quantity">
+    <input type="text" class="form-control" id="inputFinalForecast"step="0.01" name="inputFinalForecast"  placeholder="Projection quantity">
     <label for="inputMFGT" >Final Forecast</label>
   </div>
   <div class="d-grid gap-2">

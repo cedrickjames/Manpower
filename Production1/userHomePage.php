@@ -240,6 +240,26 @@ if(isset($_POST['goBack'])){
     <script src="../js/userHomePage.js"></script> 
 
 <script>
+  var forecastopt = document.getElementById("forecastButton");
+  forecastopt.classList.add("active");
+  var dashopt = document.getElementById("dashboardOpt");
+  dashopt.classList.remove("active");
+  var manpowerOpt = document.getElementById("manpowerOpt");
+  manpowerOpt.classList.remove("active");
+  var profileOpt = document.getElementById("profileOpt");
+  profileOpt.classList.remove("active");
+
+  var forecastopt = document.getElementById("forecastButton2");
+  forecastopt.classList.add("active");
+  var dashopt = document.getElementById("dashboardOpt2");
+  dashopt.classList.remove("active");
+  var manpowerOpt = document.getElementById("manpowerOpt2");
+  manpowerOpt.classList.remove("active");
+  var profileOpt = document.getElementById("profileOpt2");
+  profileOpt.classList.remove("active");
+
+  document.getElementById("forecastButton").href = "#";
+  document.getElementById("forecastButton2").href = "#";
 
 </script>
 </body>

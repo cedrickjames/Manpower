@@ -140,6 +140,9 @@ if(isset($_POST['card'])){
       <span class="navbar-brand me-4 	d-none d-lg-block " data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onclick="slideMainContent()">
         <i class="fa-solid fa-bars fa-sm"></i>
       </span>
+      <span class="navbar-brand me-4 	d-block d-lg-none " data-bs-toggle="offcanvas" href="#offcanvasExample2" role="button" aria-controls="offcanvasExample">
+      <i class="fa-solid fa-bars fa-sm"></i>
+</span>
       <span class="navbar-brand  mb-0 h1">Manpower</span>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -174,78 +177,7 @@ if(isset($_POST['card'])){
 <?php include "../modals.php" ?>
 
 <!-- sidebar  -->
-
-
-<div class="sidebar  d-none d-lg-block" id="sideBar" >
-<div class="offcanvas show offcanvas-start" id="offcanvasExample"data-bs-scroll="true" data-bs-backdrop="false" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header px-0">
-  <div class="containerName row">
-        <div class="blue px-3 col-4">
-        <div class="initialsOfName">CJ</div>
-        </div>
-        <div class="pink col-8">
-            <div class="name col-12">
-              <h5>Cedrick James</h5>
-            </div>
-            <div class="green col-12">
-            <h6>Production 1</h6>
-            </div>
-        </div>
-     
-    </div>
-  </div>
-     <hr>
-  <div class="offcanvas-body">
-  <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item side" style="height: 40px">
-        <a href="userHomePage.php" class="nav-link side " id="v-pills-home-tab" aria-selected="true">
-        <div class="icon-sampleIcon d-inline"></div>
-          <div class=" d-inline ms-1">Forecast</div>
-         <div type="button" class="d-inline float-end w-25 text-center" onclick="showForecastOptions()" id="forecastOptionButton"><i class="fa-solid fa-caret-down" id="dropdownIcon"></i></div>
-        </a>
-      </li>
-      <ul class="list-group mt-2 " id="forecastOption">
-  <li class="list-group-item" data-bs-toggle="modal" data-bs-target="#addLineModal">Add Line</li>
-  <li class="list-group-item">See forecast report</li>
-  <li class="list-group-item"data-bs-toggle="modal" data-bs-target="#updateWorkingDaysModal">Update Working Days</li>
-  <li class="list-group-item">A fourth item</li>
-  <li class="list-group-item">And a fifth one</li>
-</ul>
-      <li>
-        <a href="./dashboard.php" class="nav-link side" id="v-pills-profile-tab"  type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-        <div class="d-inline me-1" ><i class="fa fa-chart-simple fa-sm "></i></div>
-        
-        <div class="d-inline ms-1">Dashboard</div>
-        </a>
-     
-      </li>
-      <li>
-        <a href="./manpower.php" class="nav-link side active" id="v-pills-manpower-tab" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false">
-        <div class="d-inline" style="margin-right: 2px">  <i class="fa fa-users fa-sm"></i></div>
-       
-      <div class="d-inline">Manpower</div>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link side" id="v-pills-messages-tab" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-        <div class="d-inline" style="margin-right: 6px"><i class="fa fa-user fa-sm"></i></div>
-        <div class="d-inline">Profile</div>
-    
-        </a>
-      </li>
-      <li>
-
-   
-      </li>
-     
-    </ul>
-  </div>
-</div>
- 
-
-
-
-</div>
+<?php include "../sidebar.php" ?>
 
 
 <?php include "./manpowerContent.php" ?>
@@ -264,7 +196,27 @@ if(isset($_POST['card'])){
     <script src="../js/userHomePage.js"></script> 
 
 <script>
+  var forecastopt = document.getElementById("forecastButton");
+  forecastopt.classList.remove("active");
+  var dashopt = document.getElementById("dashboardOpt");
+  dashopt.classList.remove("active");
+  var manpowerOpt = document.getElementById("manpowerOpt");
+  manpowerOpt.classList.add("active");
+  var profileOpt = document.getElementById("profileOpt");
+  profileOpt.classList.remove("active");
 
+  var forecastopt = document.getElementById("forecastButton2");
+  forecastopt.classList.remove("active");
+  var dashopt = document.getElementById("dashboardOpt2");
+  dashopt.classList.remove("active");
+  var manpowerOpt = document.getElementById("manpowerOpt2");
+  manpowerOpt.classList.add("active");
+  var profileOpt = document.getElementById("profileOpt2");
+  profileOpt.classList.remove("active");
+
+    
+  document.getElementById("manpowerOpt").href = "#";
+  document.getElementById("manpowerOpt2").href = "#";
 </script>
 </body>
 </html>
