@@ -90,9 +90,17 @@ if($numrowspass == 0){
  </script><?php 
 }
 else{
+  $date = new DateTime();
+  $year  = $date->format('Y'); 
+  $month  = $date->format('F'); 
         $_SESSION['connected'] = 'TRUE';  
         $_SESSION['username'] = $username;
-        
+        $_SESSION['type'] = 'machine';
+        $_SESSION['year'] = $year;
+        $_SESSION['month'] = $month;
+
+
+
         // $userlevel = "SELECT userlevel FROM users WHERE username='$username'";
     // $userlevelresult = mysqli_query($con, $userlevel);
         // $_SESSION['userlevel'] = $userlevelresult;

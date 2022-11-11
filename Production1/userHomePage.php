@@ -43,7 +43,12 @@ if(isset($_POST['goBack'])){
   // echo "<script> console.log('skdj') ;showAddForecast();</script>";
 }
 
-
+if (isset($_POST['sbtChoose'])){
+  $_SESSION['type'] = $_POST['type'] ; 
+  $_SESSION['year'] = $_POST['year'] ;
+  $_SESSION['month']  = $_POST['month']; 
+  $_SESSION['showTable'] = "d-none";
+}
 ?>
 
 <!doctype html>
@@ -262,5 +267,40 @@ if(isset($_POST['goBack'])){
   document.getElementById("forecastButton2").href = "#";
 
 </script>
+
+<script>
+
+
+
+function testDate(){
+ var chosendate =  document.getElementById("start").value;
+ const asf = new Date(chosendate);
+ asf.setDate(asf.getDate() + 3);
+ var setdatea = asf.getFullYear()+"-"+monthNumber+"-"+asf.getDate();
+ document.getElementById("end").value = setdatea;
+
+ console.log("asdasd: "+asf)
+//  console.log(chosendate)
+const x = new Date();
+
+
+const y = new Date(chosendate);
+
+if(x<y){
+console.log("Correct");
+// console.log(x)
+}
+else{
+  alert("false")
+  const z = new Date();
+var monthNumber = new Date().getMonth()+1
+z.setDate(z.getDate() + 1);
+  console.log(z);
+  var setdate = z.getFullYear()+"-"+monthNumber+"-"+z.getDate();
+ document.getElementById("birthdaytime").value = setdate;
+ console.log(setdate)
+}
+}
+  </script>
 </body>
 </html>

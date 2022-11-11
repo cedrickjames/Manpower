@@ -147,6 +147,7 @@ if(isset($_POST['save_excel_data']))
 if($numrows==1){
   $selectEmployee = "SELECT * FROM `employees` WHERE `assign` = '$model_name'";
   $result = mysqli_query($con, $selectEmployee);
+
   $numOfPresentManpower = mysqli_num_rows($result);
 
 
@@ -175,8 +176,15 @@ $finalforecast = (float)$numOfPresentManpower - (float)$foract ;
   $inputMFGT = round($mfgt,2);
   $inputFinalForecast =  round($finalforecast,2);
 
-  $sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`,`Department`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`,`actual_manpower`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`) VALUES ('$chosenYearForecast','$inputMonth','$Department','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputActualManpower','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork')";
-mysqli_query($con, $sqlinsertForecast);
+  if($type !='mente'){
+    $sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`,`Department`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`,`actual_manpower`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`, `type`) VALUES ('$chosenYearForecast','$inputMonth','$Department','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputActualManpower','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork','machine')";
+    mysqli_query($con, $sqlinsertForecast);
+  }
+  else{
+    $sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`,`Department`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`,`actual_manpower`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`, `type`) VALUES ('$chosenYearForecast','$inputMonth','$Department','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputActualManpower','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork','mente')";
+    mysqli_query($con, $sqlinsertForecast);
+  }
+  
   ?>
   <tr>
 <td><?php echo $no++;?></td>
@@ -209,6 +217,23 @@ mysqli_query($con, $sqlinsertForecast);
 else if ($numrows>1){
   $selectModel1= "SELECT * FROM `model` WHERE `model_name` LIKE '%$modelName%' AND `subcode` = '$modelSuBCode'";
   $resultModel1 = mysqli_query($con, $selectModel1);
+  while($userRow = mysqli_fetch_assoc($resultModel1)){
+
+    $japan_stu = $userRow['japan_stu'];
+    $gpi_stu = $userRow['gpi_stu'];
+    $actual_time = $userRow['actual_time'];
+    $type = $userRow['type'];
+    $model_line = $userRow['model_line'];
+    $model_name = $userRow['model_name'];
+    $actual_time = $userRow['actual_time'];
+    $Department = $userRow['Department'];
+
+
+
+
+
+
+}
   $numrows1 = mysqli_num_rows($resultModel1);
   if($numrows1==1){
     $selectEmployee = "SELECT * FROM `employees` WHERE `assign` = '$model_name'";
@@ -240,10 +265,16 @@ else if ($numrows>1){
     $inputForAct = round($foract,2);
     $inputMFGT = round($mfgt,2);
     $inputFinalForecast =  round($finalforecast,2);
-
     
-  $sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`,`Department`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`,`actual_manpower`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`) VALUES ('$chosenYearForecast','$inputMonth','$Department','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputActualManpower','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork')";
-  mysqli_query($con, $sqlinsertForecast);
+    if($type != "mente"){
+      $sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`,`Department`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`,`actual_manpower`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`, `type`) VALUES ('$chosenYearForecast','$inputMonth','$Department','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputActualManpower','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork','machine')";
+      mysqli_query($con, $sqlinsertForecast);
+    }
+    else{
+      $sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`,`Department`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`,`actual_manpower`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`,`type`) VALUES ('$chosenYearForecast','$inputMonth','$Department','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputActualManpower','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork','mente')";
+      mysqli_query($con, $sqlinsertForecast);
+    }
+
     ?>
     <tr style="color: green">
   <td><?php echo $no++;?></td>
@@ -303,7 +334,7 @@ else if ($numrows>1){
       $inputFinalForecast =  round($finalforecast,2);
 
       
-  $sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`,`Department`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`,`actual_manpower`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`) VALUES ('$chosenYearForecast','$inputMonth','$Department','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputActualManpower','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork')";
+  $sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`,`Department`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`,`actual_manpower`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`, `type`) VALUES ('$chosenYearForecast','$inputMonth','$Department','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputActualManpower','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork','machine')";
   mysqli_query($con, $sqlinsertForecast);
       ?>
       <tr style="color: pink">
@@ -362,7 +393,7 @@ else if ($numrows>1){
       $inputFinalForecast =  round($finalforecast,2);
 
       
-  $sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`,`Department`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`,`actual_manpower`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`) VALUES ('$chosenYearForecast','$inputMonth','$Department','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputActualManpower','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork')";
+  $sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`,`Department`, `line`, `model`, `projection_Qty`, `gpiSTU`, `japanSTU`,`actual_time`, `total_gpi_target`, `total_actual`, `forecast_actual`,`actual_manpower`, `mp_forecast_gpi_target`, `total_manpower_needed`,`noOfworkingDays`,`type`) VALUES ('$chosenYearForecast','$inputMonth','$Department','$inputLine','$inputModel','$inputProjQnty','$inputGpiSTU','$inputJpnSTU','$inputActualTime','$inputTotGpiTarget','$inputTotActual','$inputForAct','$inputActualManpower','$inputMFGT', '$inputFinalForecast','$inputdaysOfWork', 'mente')";
   mysqli_query($con, $sqlinsertForecast);
       ?>
       <tr style="color: orange">
