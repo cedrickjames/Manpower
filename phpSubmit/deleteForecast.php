@@ -13,7 +13,7 @@ mysqli_query($con, $sqldelete);
   //   footer: '<a href="">Why do I have this issue?</a>'
   })
    </script><?php 
-  header("Location: ../Production1/userHomePage.php");
+  header("Location: ../system/userHomePage.php");
 // header("Refresh:0");
   }
   ?>

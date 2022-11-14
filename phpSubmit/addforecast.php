@@ -30,7 +30,7 @@ $sqlinsertForecast= "INSERT INTO `forecast`(`year`, `month`,`Department`, `line`
 mysqli_query($con, $sqlinsertForecast);
 // $_SESSION['location']="list_of_models";
 
-header("Location: ../Production1/userHomePage.php");
+header("Location: ../system/userHomePage.php");
 }
 
 

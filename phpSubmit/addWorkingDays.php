@@ -73,13 +73,13 @@ else if($i==12){
 
     // echo 'day'.$i;
 }
-// header("Location: ../Production1/list_of_models.php");
+// header("Location: ../system/list_of_models.php");
 $location = $_SESSION['location'];
 if($location == "list_of_models"){
-    header("Location: ../Production1/list_of_models.php");
+    header("Location: ../system/list_of_models.php");
 }
 else{
-    header("Location: ../Production1/userHomePage.php");
+    header("Location: ../system/userHomePage.php");
 
 }
 

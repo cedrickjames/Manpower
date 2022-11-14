@@ -4,13 +4,8 @@
 session_start();
   include ("./connection.php");
   if(isset( $_SESSION['connected'])){
-    if($_SESSION['department']=="Production1"){
-      header("location: Production1/userHomePage.php");
 
-    }
- else if($_SESSION['department']=="Production2"){
-  header("location: Production2/userHomePage.php");
-}
+header("location: system/userHomePage.php");
 
   }
 
@@ -51,12 +46,14 @@ if(isset($_POST['sbtlogin'])){
     $result = mysqli_query($con, $sql1);
     $numrows = mysqli_num_rows($result);
 
-    $selectUserDept= "SELECT `department` FROM `users` WHERE `user_id` = '$username' LIMIT 1";
+    $selectUserDept= "SELECT * FROM `users` WHERE `user_id` = '$username' LIMIT 1";
     $resultDept = mysqli_query($con, $selectUserDept);
     
     while($userRow = mysqli_fetch_assoc($resultDept)){
 
       $userDept = $userRow['department'];
+      $approved = $userRow['approved'];
+
 $_SESSION['userDept'] =  $userDept; 
 
       
@@ -90,33 +87,42 @@ if($numrowspass == 0){
  </script><?php 
 }
 else{
-  $date = new DateTime();
-  $year  = $date->format('Y'); 
-  $month  = $date->format('F'); 
-        $_SESSION['connected'] = 'TRUE';  
-        $_SESSION['username'] = $username;
-        $_SESSION['type'] = 'machine';
-        $_SESSION['year'] = $year;
-        $_SESSION['month'] = $month;
+  if($approved){
+    $date = new DateTime();
+    $year  = $date->format('Y'); 
+    $month  = $date->format('F'); 
+          $_SESSION['connected'] = 'TRUE';  
+          $_SESSION['username'] = $username;
+          $_SESSION['type'] = 'machine';
+          $_SESSION['year'] = $year;
+          $_SESSION['month'] = $month;
+  
+  
+  
+          // $userlevel = "SELECT userlevel FROM users WHERE username='$username'";
+      // $userlevelresult = mysqli_query($con, $userlevel);
+          // $_SESSION['userlevel'] = $userlevelresult;
+          while($userRow = mysqli_fetch_assoc($result)){
+              $_SESSION['full_name'] = $userRow['full_name'];
+              $_SESSION['department'] = $userRow['department'];
+              $_SESSION['profile_picture'] = $userRow['profile_picture'];
 
+            
+          }
+          header("location: ./system/userHomePage.php");
+  }
+  else{
+    ?><script>
+    Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Your registration is not yet approved.',
+//   footer: '<a href="">Why do I have this issue?</a>'
+})
+ </script><?php 
+  }
+  
 
-
-        // $userlevel = "SELECT userlevel FROM users WHERE username='$username'";
-    // $userlevelresult = mysqli_query($con, $userlevel);
-        // $_SESSION['userlevel'] = $userlevelresult;
-        while($userRow = mysqli_fetch_assoc($result)){
-            $_SESSION['full_name'] = $userRow['full_name'];
-            $_SESSION['department'] = $userRow['department'];
-
-        }
-            if($_SESSION['department'] == "Production1"){
-                header("location: ./Production1/userHomePage.php");
-                   
-                }
-                else if ($_SESSION['department']  == "Production2"){
-                header("location: ./Production2/userHomePage.php");
-    
-                }
     }
 
     }

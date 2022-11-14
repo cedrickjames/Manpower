@@ -176,6 +176,9 @@ function previewImage(image_blog){
      previewImage(this);
    });
 
+   
+  
+   
    document.getElementById("floatingInputName").onkeyup = function() {typeName()};
    function typeName(){
     var nameValue = document.getElementById("floatingInputName");
@@ -431,6 +434,12 @@ $(document).ready(function () {
   });
 });
 
+$(document).ready(function () {
+  
+  $('#usersTable').DataTable(  {
+    responsive: true, 
+  });
+});
 function showAddForecast(){
   var forecastTable = document.getElementById("forecastTable");
   forecastTable.classList.add("d-none");
@@ -479,6 +488,10 @@ function passForecastDataToEdit(forecast_Id, line, model, projection_Qty, gpiSTU
 
 }
 
+function passRequest(id, name){
+document.getElementById('requestorID').value = id;
+document.getElementById('requestorFullName').innerHTML = name;
+}
 
 (function($) {
 

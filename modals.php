@@ -803,7 +803,7 @@ else{
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form action="../Production1/import.php" method="POST" enctype="multipart/form-data">
+      <form action="../system/import.php" method="POST" enctype="multipart/form-data">
 
       <div class="input-group">
   <input type="file" class="form-control" name="import_file" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
@@ -815,6 +815,31 @@ else{
         <button type="submit" name="save_excel_data" class="btn btn-primary">Proceed</button>
       </div>
       </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Are you sure -->
+
+<div class="modal fade" id="confirmRequest" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="signup_request.php" method="POST">
+      <div class="modal-body">
+        <input name="requestorID" type="text" id="requestorID" class="d-none">
+          <h5>Are you sure you want to approve the request of <span style="color: #6164D3" id="requestorFullName"></span>?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" name="approveRequest"class="btn btn-success">Yes</button>
+      </div>
+</form>
     </div>
   </div>
 </div>

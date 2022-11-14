@@ -13,12 +13,12 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ms-xl-5 ms-sm-0 mt-3 mt-sm-0 w-100">
+        <ul class="navbar-nav ms-xl-5 ms-sm-0 mt-3 mt-sm-0 w-100 d-none">
           <li class="nav-item px-xl-2 ">
             <a class="nav-link active" aria-current="page" href="#">Production 1</a>
           </li>
           <li class="nav-item px-xl-2">
-            <a class="nav-link " href="../Production2/userHomePage.php"> Production 2</a>
+            <a class="nav-link " href="#"> Production 2</a>
           </li>
           <li class="nav-item px-xl-2">
             <a class="nav-link " href="#"> Quality Control</a>
@@ -32,7 +32,7 @@
           </button>
     </li> -->
           <li class="flex-row-reverse" onclick="showSulok()">
-          <div class="pictureBadge m-0"></div>
+          <div class="pictureBadge m-0" style="background-image: url('<?php echo $_SESSION['profile_picture'] ; ?>');"></div>
           </li>
         </ul>
         <div class="w-15 h-15 bg-success"> </div>
@@ -40,3 +40,23 @@
     </div>
     
   </nav>
+
+  <div class="sulok d-none" id="sulok">
+ <div class="container text-center h-100 div-sulok">
+  <div class="row row-cols-1 row-sulok p-3">
+    <div class="col-5"> <div class="pictureBadgeSulok m-0" style="background-image: url('<?php echo $_SESSION['profile_picture'] ; ?>');"></div></div>
+    <div class="col-7">
+      <div class="row">
+        <div class="col-12 p-0 fw-semibold fs-4"><h4 class="sulok-name"><?php echo $_SESSION['full_name']  ?></h4></div>
+        <div class="col-12 p-0">mis.dev@glory.com.ph</div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="row row-cols-1 row-sulok signout ">
+    <div class="col-12 "><a href="../logout.php" class="hrefsignout">Signout</a></div>
+  </div> 
+
+</div>
+ </div>
