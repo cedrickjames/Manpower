@@ -10,7 +10,6 @@ $chooseMonth = $_SESSION['month'];
 
 
 
-
 ?>
 <div class="main-content px-5" id="mainContent">
   <div id="forecastTable" class="<?php $show = $_SESSION['showTable']; if($show=="d-none"){echo "d-none";} else{ echo "";} ?>">
@@ -25,6 +24,7 @@ $chooseMonth = $_SESSION['month'];
           <th style="min-width:15px;">ID</th>
 
           <th>Line</th>
+          <th>Type</th>
           <th>Model</th>
           <th>Projection</th>
           <th>Japan<br> STU</th>
@@ -68,6 +68,8 @@ $chooseMonth = $_SESSION['month'];
               $mp_forecast_gpi_target = $data['mp_forecast_gpi_target'];
               $total_manpower_needed = $data['total_manpower_needed'];
               $inputdaysOfWork = $data['noOfworkingDays'];
+              $type = $data['type'];
+
 
               
         ?>
@@ -75,6 +77,8 @@ $chooseMonth = $_SESSION['month'];
           <td><?php echo $sn; ?></td>
           <td><?php echo $forecast_Id; ?></td>
           <td><?php echo $line; ?></td>
+          <td><?php echo $type; ?></td>
+
           <td><?php echo $model; ?></td>
           <td><?php echo $projection_Qty;?></td>
           <td><?php echo $gpiSTU;?></td>
@@ -102,6 +106,9 @@ $chooseMonth = $_SESSION['month'];
       <div class="d-grid gap-2">
         <button class="btn btn-outline-success" name="addForecastBtn" id="addForecastBtn" type="submit" >Add a Forecast</button>
       </div>
+      <div class="d-grid gap-2 mt-1">
+        <button class="btn btn-success" name="addForecastBtn" id="" type="button" data-bs-toggle="modal" data-bs-target="#importModal" >Import</button>
+      </div>
     </form>
   </div>
   <div id="cardholder" class="<?php $show = $_SESSION['showTable']; if($show=="d-none"){echo "";} else{ echo "d-none";} ?>">
@@ -120,27 +127,29 @@ $chooseMonth = $_SESSION['month'];
                <div class="col">
                   <form action="userHomePage.php" method="POST">
                       <div class="input-group mb-3">
-                      <select class="form-select" name="type" placeholder="Choose Type"  id="modelType">
+                      <select class="form-select"  name="type" placeholder="Choose Type"  id="modelType">
                       <option selected>Select Type</option>
                       <option value="machine">Machine</option>
                       <option value="mente">Mente</option>
                       </select>
-                          <select  class="form-select" name="month" placeholder="Choose Month"  id="fsyear1">
+                      <?php echo "<script>  const selecttype = document.querySelector('#modelType'); selecttype.value = '$chooseType' </script>"; ?>
+                          <select  class="form-select" name="month" placeholder="Choose Month"  id="chosenMonth">
                           <option selected disabled>Choose...</option>
-                          <option>January</option>
-                          <option>February</option>
-                          <option>March</option>
-                          <option>April</option>
-                          <option>May</option>
-                          <option>June</option>
-                          <option>July</option>
-                          <option>August</option>
-                          <option>September</option>
-                          <option>October</option>
-                          <option>November</option>
-                          <option>December</option>
+                          <option value="January">January</option>
+                          <option value="February">February</option>
+                          <option value="March">March</option>
+                          <option value="April">April</option>
+                          <option value="May">May</option>
+                          <option value="June">June</option>
+                          <option value="July">July</option>
+                          <option value="August">August</option>
+                          <option value="September">September</option>
+                          <option value="October">October</option>
+                          <option value="November">November</option>
+                          <option value="December">December</option>
                             </select>       
-                                  <input type="number" name="year" id="fsyear2" class="form-control" placeholder="Choose Year" aria-label="Server">
+                            <?php echo "<script>  const selectyear = document.querySelector('#chosenMonth'); selectyear.value = '$chooseMonth' </script>"; ?>
+                                  <input type="number" name="year" id="fsyear2" value="<?php echo $chooseYear; ?>" class="form-control" placeholder="Choose Year" aria-label="Server">
                                         <button type="submit" name="sbtChoose" class="btn btn-warning">Submit</button>
                       </div>
                     </form>
@@ -187,51 +196,54 @@ $chooseMonth = $_SESSION['month'];
                         $selectTotalGPITArget= "SELECT SUM( `actual_time` * `projection_Qty`) AS 'Product' FROM `forecast` WHERE `line`='$machineName' AND`month` = '$chooseMonth' AND `year` = '$chooseYear' AND `type` = '$chooseType';";
                         $resultGPITARGET = mysqli_query($con, $selectTotalGPITArget);
                         while($userRow = mysqli_fetch_assoc($resultGPITARGET)){
-                        $gpitargetTotalPerLine = $userRow['Product'];
+                        $actualtargetTotalPerLine = $userRow['Product'];
                         }
-                        $roundgpitargetTotalPerLine =round($gpitargetTotalPerLine,2);
-                        $finalroundgpitargetTotalPerLine = number_format($roundgpitargetTotalPerLine, 2);echo $finalroundgpitargetTotalPerLine;
+                        $roundactualtargetTotalPerLine =round($actualtargetTotalPerLine,2);
+                        $finalroundactualtargetTotalPerLine = number_format($roundactualtargetTotalPerLine, 2);echo $finalroundactualtargetTotalPerLine;
                         
                         ?></span></li>
                     <li class="list-group-item">FORECAST (GPI TARGET): <span class="text-muted"><?php
-                        $selectTotalGPITArget= "SELECT SUM( `gpiSTU` * `projection_Qty`) AS 'Product' FROM `forecast` WHERE `line`='$machineName' AND `month` = '$chooseMonth' AND `year` = '$chooseYear' AND `type` = '$chooseType';";
-                        $resultGPITARGET = mysqli_query($con, $selectTotalGPITArget);
-                        while($userRow = mysqli_fetch_assoc($resultGPITARGET)){
-                        $gpitargetTotalPerLine = $userRow['Product'];
-                        }
-                        $roundgpitargetTotalPerLine =round($gpitargetTotalPerLine,2);
-                        $finalroundgpitargetTotalPerLine = number_format($roundgpitargetTotalPerLine, 2);echo $finalroundgpitargetTotalPerLine;
-                        
+
+                      $selectYear= "SELECT `$chooseYear` FROM `workingdays` WHERE `month` = '$chooseMonth';";
+                      $resultDays = mysqli_query($con, $selectYear);
+                        while($userRow = mysqli_fetch_assoc($resultDays)){
+                            $noOfDays = $userRow[$chooseYear];
+                            }
+                            if($roundgpitargetTotalPerLine ==0){
+                              echo 0;
+                            }else{
+                              $quotient = (float)$roundgpitargetTotalPerLine /  (float)435 /  (float)$noOfDays;
+                              $roundforecastgpitarget =round($quotient,2);
+                              $finalroundforecastgpitarget = number_format($roundforecastgpitarget, 2);echo $finalroundforecastgpitarget;
+
+                            }
+// echo $roundgpitargetTotalPerLine;
+                           
                         ?></span></li>
                          <li class="list-group-item">FORECAST (ACTUAL): <span class="text-muted"><?php
-                        $selectTotalGPITArget= "SELECT SUM( `gpiSTU` * `projection_Qty`) AS 'Product' FROM `forecast` WHERE `line`='$machineName' AND `month` = '$chooseMonth' AND `year` = '$chooseYear' AND `type` = '$chooseType';";
-                        $resultGPITARGET = mysqli_query($con, $selectTotalGPITArget);
-                        while($userRow = mysqli_fetch_assoc($resultGPITARGET)){
-                        $gpitargetTotalPerLine = $userRow['Product'];
-                        }
-                        $roundgpitargetTotalPerLine =round($gpitargetTotalPerLine,2);
-                        $finalroundgpitargetTotalPerLine = number_format($roundgpitargetTotalPerLine, 2);echo $finalroundgpitargetTotalPerLine;
-                        
+                          $selectYear= "SELECT `$chooseYear` FROM `workingdays` WHERE `month` = '$chooseMonth';";
+                          $resultDays = mysqli_query($con, $selectYear);
+                          $roundforecastactual = 0;
+                            while($userRow = mysqli_fetch_assoc($resultDays)){
+                                $noOfDays = $userRow[$chooseYear];
+                                }
+                            if($roundactualtargetTotalPerLine ==0){
+                              echo 0;
+                            }else{
+                              $quotient = (float)$roundactualtargetTotalPerLine /  (float)435 /  (float)$noOfDays;
+                              $roundforecastactual=round($quotient,2);
+                              $finalroundforecastgpitarget = number_format($roundforecastactual, 2);echo $finalroundforecastgpitarget;
+                            
+                            }
                         ?></span></li>
                          <li class="list-group-item">PRESENT: <span class="text-muted"><?php
-                        $selectTotalGPITArget= "SELECT SUM( `gpiSTU` * `projection_Qty`) AS 'Product' FROM `forecast` WHERE `line`='$machineName' AND `month` = '$chooseMonth' AND `year` = '$chooseYear' AND `type` = '$chooseType';";
-                        $resultGPITARGET = mysqli_query($con, $selectTotalGPITArget);
-                        while($userRow = mysqli_fetch_assoc($resultGPITARGET)){
-                        $gpitargetTotalPerLine = $userRow['Product'];
-                        }
-                        $roundgpitargetTotalPerLine =round($gpitargetTotalPerLine,2);
-                        $finalroundgpitargetTotalPerLine = number_format($roundgpitargetTotalPerLine, 2);echo $finalroundgpitargetTotalPerLine;
-                        
+                        $selectemployees= "SELECT * FROM `employees` WHERE `assign_line` = '$machineName'";
+                        $resultEmployees = mysqli_query($con, $selectemployees);
+                        $countEmployees = mysqli_num_rows($resultEmployees);
+                       echo $countEmployees;
                         ?></span></li>
                          <li class="list-group-item">AMOUNT:  <span class="text-muted"><?php
-                        $selectTotalGPITArget= "SELECT SUM( `gpiSTU` * `projection_Qty`) AS 'Product' FROM `forecast` WHERE `line`='$machineName' AND `month` = '$chooseMonth' AND `year` = '$chooseYear' AND `type` = '$chooseType';";
-                        $resultGPITARGET = mysqli_query($con, $selectTotalGPITArget);
-                        while($userRow = mysqli_fetch_assoc($resultGPITARGET)){
-                        $gpitargetTotalPerLine = $userRow['Product'];
-                        }
-                        $roundgpitargetTotalPerLine =round($gpitargetTotalPerLine,2);
-                        $finalroundgpitargetTotalPerLine = number_format($roundgpitargetTotalPerLine, 2);echo $finalroundgpitargetTotalPerLine;
-                        
+                       echo $countEmployees - $roundforecastactual;
                         ?></span></li>
 
                   </ul>

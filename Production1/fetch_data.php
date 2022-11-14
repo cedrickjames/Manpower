@@ -2,7 +2,7 @@
 include ("../connection.php");
   $db= $con;
 
-
+  $Department = $_SESSION['department'];
 
 
   $tableName="line";
@@ -19,7 +19,7 @@ include ("../connection.php");
      $msg= "Table Name is empty";
   }else{
   $columnName = implode(", ", $columns);
-  $query = "SELECT * FROM `line` WHERE `Department` ='Production1'";
+  $query = "SELECT * FROM `line` WHERE `Department` ='$Department'";
  //  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
   $result = $db->query($query);
   if($result== true){ 
@@ -54,7 +54,7 @@ include ("../connection.php");
   $columnName = implode(", ", $columnsModelAll);
   // $query = "SELECT * FROM `model`;";
 //   $idModelLine= $_SESSION['lineId'];
-  $query = "SELECT * FROM `model`  WHERE `Department` ='Production1';";
+  $query = "SELECT * FROM `model`  WHERE `Department` ='$Department';";
   
   //  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
   $result = $db->query($query);
@@ -136,7 +136,7 @@ function fetch_data_employees($db, $tableEmployees, $columnEmployees){
 $columnName = implode(", ", $columnEmployees);
 // $query = "SELECT * FROM `model`;";
 // $idModelLine= $_SESSION['lineId'];
-$query = "SELECT * FROM `employees`  WHERE `dept` ='Production1';";
+$query = "SELECT * FROM `employees`  WHERE `dept` ='$Department';";
 
 //  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
 $result = $db->query($query);
@@ -160,7 +160,7 @@ return $msg;
 
 
 $tableForecast="forecast";
-$columnForecast= ['forecast_Id', 'year', 'month', 'line', 'model', 'projection_Qty', 'actual_time', 'total_gpi_target', 'total_actual', 'forecast_actual', 'mp_forecast_gpi_target', 'total_manpower_needed'];
+$columnForecast= ['forecast_Id', 'year', 'month', 'line', 'model', 'projection_Qty', 'actual_time', 'total_gpi_target', 'total_actual', 'forecast_actual', 'mp_forecast_gpi_target', 'total_manpower_needed','type'];
 $fetchDataForecast = fetch_data_Forecast($db, $tableNameModel, $columnForecast);
 
 
@@ -175,7 +175,7 @@ function fetch_data_forecast($db, $tableForecast, $columnForecast){
 $columnName = implode(", ", $columnForecast);
 // $query = "SELECT * FROM `model`;";
 // $idModelLine= $_SESSION['lineId'];
-$query = "SELECT * FROM `forecast` WHERE `Department` = 'Production1';";
+$query = "SELECT * FROM `forecast` WHERE `Department` = '$Department';";
 
 //  SELECT * FROM `usertask` WHERE `username` = 'cjorozo';
 $result = $db->query($query);

@@ -213,9 +213,11 @@ font-weight: 600;
 padding-left: 3px;
 }
 .btn-success{
-  background-color:  #0C4223;
-  --bs-btn-hover-color: rgb(5, 63, 17);
+  background-color:  #061362;
+  --bs-btn-hover-color: #061362;
   --bs-btn-hover-bg: #ffffff;
+  color: white;
+  border-color: #061362;
 }
 #offcanvasExample{
   // position:absolute;

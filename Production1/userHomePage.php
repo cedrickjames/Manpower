@@ -2,6 +2,15 @@
 session_start();
 include ("../connection.php");
 
+
+
+
+$samplearray = array();
+array_push($samplearray, ['a','b','c','d','e','f','g','h','i','j']);
+array_push($samplearray, ['a','b','c','d','e','f','g','h','i','j']);
+array_push($samplearray, ['a','b','c','d','e','f','g','h','i','j']);
+
+
 if(!isset( $_SESSION['connected'])){
   header("location:../signin.php");
 }
@@ -159,50 +168,7 @@ if (isset($_POST['sbtChoose'])){
     }
     
        ?>
-  <nav class="navbar navbar-dark navbar-expand-sm shadow px-0 px-sm-3 sticky-top" style="background-color: #061362;">
-    <div class="container-fluid px-3">
-      <span class="navbar-brand me-4 	d-none d-lg-block " data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onclick="slideMainContent()">
-      <i class="fa-solid fa-bars fa-sm"></i>
-
-      </span>
-      <span class="navbar-brand me-4 	d-block d-lg-none " data-bs-toggle="offcanvas" href="#offcanvasExample2" role="button" aria-controls="offcanvasExample">
-      <i class="fa-solid fa-bars fa-sm"></i>
-</span>
-      <span class="navbar-brand  mb-0 h1">Manpower</span>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ms-xl-5 ms-sm-0 mt-3 mt-sm-0 w-100">
-          <li class="nav-item px-xl-2 ">
-            <a class="nav-link active" aria-current="page" href="#">Production 1</a>
-          </li>
-          <li class="nav-item px-xl-2">
-            <a class="nav-link " href="../Production2/userHomePage.php"> Production 2</a>
-          </li>
-          <li class="nav-item px-xl-2">
-            <a class="nav-link " href="#"> Quality Control</a>
-          </li>
-
-        </ul>
-        <ul class="nav justify-content-end ml-0" style="width: 100%">
-          <!-- <li class="nav-item mx-2 d-grid gap-2 d-none d-lg-flex">
-          <button type="button" class="btn btn-success  fs-5 h-100 rounded-pill px-5 me-5 ">Invite
-            <i class="fa-regular fa-envelope ps-2"></i>
-          </button>
-    </li> -->
-          <li class="flex-row-reverse" onclick="showSulok()">
-          <div class="pictureBadge m-0"></div>
-          </li>
-        </ul>
-        <div class="w-15 h-15 bg-success"> </div>
-      </div>
-    </div>
-    
-  </nav>
-
-
+  <?php include "../nav.php";?>
  <div class="sulok d-none" id="sulok">
  <div class="container text-center h-100 div-sulok">
   <div class="row row-cols-1 row-sulok p-3">
@@ -302,5 +268,27 @@ z.setDate(z.getDate() + 1);
 }
 }
   </script>
+
+<script>
+    //  var samplearray = <?php echo json_encode($samplearray); ?>;
+  
+
+    // csvContent = "data:text/csv;charset=utf-8,";
+    //                 /* add the column delimiter as comma(,) and each row splitted by new line character (\n) */
+    //                 samplearray.forEach(function(rowArray){
+    //                    row = rowArray.join(",");
+    //                    csvContent += row + "\r\n";
+    //                });
+             
+    //                /* create a hidden <a> DOM node and set its download attribute */
+    //                var encodedUri = encodeURI(csvContent);
+    //                var link = document.createElement("a");
+    //                link.setAttribute("href", encodedUri);
+    //                link.setAttribute("download", "Failed EUC.csv");
+    //                document.body.appendChild(link);
+    //                 /* download the data file named 'Stock_Price_Report.csv' */
+    //                link.click();
+ 
+</script>
 </body>
 </html>

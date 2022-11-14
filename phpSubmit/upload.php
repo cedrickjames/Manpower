@@ -2,6 +2,8 @@
 session_start();
 date_default_timezone_set("Asia/Singapore");
 include ("../connection.php");
+
+$Department = $_SESSION['department'];
 $message = ''; 
 if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload')
 {
@@ -56,7 +58,7 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload')
   $destinationPath=$dest_path;
 
 
-  $sqlinsertLine = "INSERT INTO `line`(`line_name`, `line_desc`, `line_location`,`Department`, `last_time_updated`, `line_photo`,) VALUES ('$line_name','$machine_desc','$machine_loc','Production1','$LTUpdated','$destinationPath');";
+  $sqlinsertLine = "INSERT INTO `line`(`line_name`, `line_desc`, `line_location`,`Department`, `last_time_updated`, `line_photo`,) VALUES ('$line_name','$machine_desc','$machine_loc','$Department','$LTUpdated','$destinationPath');";
   mysqli_query($con, $sqlinsertLine);
   
 }

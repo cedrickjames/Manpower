@@ -114,7 +114,12 @@ if(isset($_POST['save_excel_data']))
               $dueDate = $year.'-'.$month.'-'.$day;
               $dateDue = new DateTime($dueDate); 
               $Month  = $dateDue->format('F'); 
-              
+                            $DATE = new DateTime(); 
+
+              $Month  = $dateDue->format('F'); 
+              $YEAR =  $DATE->format('Y');
+
+              if($year>=$YEAR){
               $selectYear= "SELECT `$year` FROM `workingdays` WHERE `month` = '$Month';";
               $resultDays = mysqli_query($con, $selectYear);
               while($userRow = mysqli_fetch_assoc($resultDays)){
@@ -457,6 +462,7 @@ else if($numrows==0){
 
 
                 $msg = true;
+}
             }
             else
             {
