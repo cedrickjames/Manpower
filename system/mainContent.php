@@ -10,7 +10,9 @@ $chooseMonth = $_SESSION['month'];
 
 
 
+
 ?>
+
 <div class="main-content px-5 pt-3" id="mainContent">
   <div id="forecastTable" class="<?php $show = $_SESSION['showTable']; if($show=="d-none"){echo "d-none";} else{ echo "";} ?>">
     <h2 class="fw-bolder text-dark ">Forecast <?php echo  $_SESSION['showTable']; ?></h2>
@@ -110,6 +112,7 @@ $chooseMonth = $_SESSION['month'];
         <button class="btn btn-success" name="addForecastBtn" id="" type="button" data-bs-toggle="modal" data-bs-target="#importModal" >Import</button>
       </div>
     </form>
+
   </div>
   <div id="cardholder" class="<?php $show = $_SESSION['showTable']; if($show=="d-none"){echo "";} else{ echo "d-none";} ?>">
   <div class="col goback ms-2">

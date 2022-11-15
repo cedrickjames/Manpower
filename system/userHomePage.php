@@ -109,6 +109,84 @@ if (isset($_POST['sbtChoose'])){
 
     date_default_timezone_set("Asia/Singapore");
     
+    
+$account_ID = $_SESSION['account_ID'];
+if (isset($_POST['editProfile']) && $_POST['editProfile'] == 'Upload'){
+  if (isset($_FILES['changeprofile']) && $_FILES['changeprofile']['error'] === UPLOAD_ERR_OK)
+  {
+    // get details of the uploaded file
+    $fileTmpPath = $_FILES['changeprofile']['tmp_name'];
+    $fileName = $_FILES['changeprofile']['name'];
+    $fileSize = $_FILES['changeprofile']['size'];
+    $fileType = $_FILES['changeprofile']['type'];
+    $fileNameCmps = explode(".", $fileName);
+    $fileExtension = strtolower(end($fileNameCmps));
+
+    // sanitize file-name
+    $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+
+    // check if file has one of the following extensions
+    $allowedfileExtensions = array('jpg', 'gif', 'png', 'JPEG', 'img');
+
+    if (in_array($fileExtension, $allowedfileExtensions))
+    {
+      // directory in which the uploaded file will be moved
+      $uploadFileDir = '../uploaded_files/profile_pictures';
+      $dest_path = $uploadFileDir . $newFileName;
+
+      if(move_uploaded_file($fileTmpPath, $dest_path)) 
+      {
+        $message ='File is successfully uploaded.';
+      }
+      else 
+      {
+        $message = 'There was some error moving the file to upload directory. Please make sure the upload directory is writable by web server.';
+      }
+    }
+    else
+    {
+      $message = 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
+    }
+  }
+  else
+  {
+    $message = 'There is some error in the file upload. Please check the following error.<br>';
+    $message .= 'Error:' . $_FILES['uploadedFile']['error'];
+  }
+
+    
+    $destinationPath=$dest_path;
+
+
+          $sqlupdateDP = "UPDATE `users` SET `profile_picture`='$destinationPath' WHERE `account_ID` = '$account_ID'";
+          $updateDPSql = mysqli_query($con, $sqlupdateDP);
+      if($updateDPSql){
+        ?><script>
+        Swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: 'You have successfully update your profile picture.',
+    //   footer: '<a href="">Why do I have this issue?</a>'
+    }).then(function() {
+  window.location = "userHomePage.php";
+  });
+     </script><?php 
+     $_SESSION['profile_picture'] = $destinationPath;
+      }
+      else{
+        ?><script>
+        Swal.fire({
+      icon: 'error',
+      title: 'Unsuccessful',
+      text: 'Update Failed.',
+    //   footer: '<a href="">Why do I have this issue?</a>'
+    }).then(function() {
+  window.location = "userHomePage.php";
+  });
+     </script><?php 
+       }
+}
+
     if (isset($_POST['changeYear'])){
         $year =  $_POST['modal_year'];
         // echo "<script>console.log('$year'); </script>";

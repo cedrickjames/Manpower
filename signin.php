@@ -106,6 +106,8 @@ else{
               $_SESSION['full_name'] = $userRow['full_name'];
               $_SESSION['department'] = $userRow['department'];
               $_SESSION['profile_picture'] = $userRow['profile_picture'];
+              $_SESSION['account_ID'] = $userRow['account_ID'];
+
 
             
           }

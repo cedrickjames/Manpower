@@ -129,6 +129,8 @@
   font-size: 33px;
   padding: auto 0;
   font-weight: 500;
+  box-sizing: border-box;
+  background-clip: content-box;
 }
 
 .containerName {
@@ -645,10 +647,27 @@
   background-color: white;
 }
 
+.picbg {
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(6, 18, 98, 0.7333333333);
+  position: relative;
+  background-size: cover;
+  border-radius: 50%;
+  margin-right: 20px;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+  font-size: 33px;
+  padding: auto 0;
+  font-weight: 500;
+}
+
 .pictureBadgeSulok {
   height: 100%;
   width: 100%;
-  background-color: #0C4223;
+  background-color: #061362;
   background-size: cover;
   border-radius: 50%;
   margin-right: 20px;
@@ -712,4 +731,22 @@
 
 .offcanvas-header {
   background-image: url("../samplePictures/GPI Machine/background for sidebar.png");
+}
+
+.profilepic__icon {
+  opacity: 1;
+}
+
+.profile_pic:hover .picbg {
+  opacity: 1;
+  transition: 0.5s ease;
+}
+
+input[type=file] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }/*# sourceMappingURL=style.css.map */

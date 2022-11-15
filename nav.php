@@ -1,3 +1,6 @@
+
+
+
 <nav class="navbar navbar-dark navbar-expand-sm shadow px-0 px-sm-3 sticky-top" style="background-color: #061362;">
     <div class="container-fluid px-3">
       <span class="navbar-brand me-4 	d-none d-lg-block " data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" onclick="slideMainContent()">
@@ -33,6 +36,8 @@
     </li> -->
           <li class="flex-row-reverse" onclick="showSulok()">
           <div class="pictureBadge m-0" style="background-image: url('<?php echo $_SESSION['profile_picture'] ; ?>');"></div>
+
+      
           </li>
         </ul>
         <div class="w-15 h-15 bg-success"> </div>
@@ -44,7 +49,21 @@
   <div class="sulok d-none" id="sulok">
  <div class="container text-center h-100 div-sulok">
   <div class="row row-cols-1 row-sulok p-3">
-    <div class="col-5"> <div class="pictureBadgeSulok m-0" style="background-image: url('<?php echo $_SESSION['profile_picture'] ; ?>');"></div></div>
+    <div class="profile_pic col-5">
+    
+       <div class="pictureBadgeSulok m-0 " id="profilechange" style="background-image: url('<?php echo $_SESSION['profile_picture'] ; ?>');">
+          <div class="picbg d-flex align-items-center">
+            <form action="userHomePage.php" method="POST" enctype="multipart/form-data">
+          <input type="file" class="editProfile" name="changeprofile" id="changeprofile"/>
+          <button type = "submit" name="editProfile" id="editProfile" class="d-none" value="Upload"></button>
+          </form>
+             <span class="profilepic__icon" style="margin: 0 auto"> <i class="fas fa-camera"></i></span>
+       </div>
+ 
+       </div>
+    
+  </div>
+    
     <div class="col-7">
       <div class="row">
         <div class="col-12 p-0 fw-semibold fs-4"><h4 class="sulok-name"><?php echo $_SESSION['full_name']  ?></h4></div>
@@ -60,3 +79,42 @@
 
 </div>
  </div>
+
+
+ <script>
+  var validImagetypes=["image/gif", "image/jpeg", "image/png"];
+  function previewImageSignup(image_blog){
+    // document.getElementById("signupImage").style.display="none";
+    // document.getElementById("cardImage").display=null;
+    $("#profilechange").fadeIn();
+  
+    
+      if(image_blog.files && image_blog.files[0])
+      {
+       var reader=new FileReader();
+       var pictureeme =  $("#changeprofile").prop("files")[0];
+         reader.onload=function(e)
+         {
+          $("#profilechange").css("background-image", "url(" + e.target.result + ")");
+          //  $("#signupImage").attr('src', e.target.result);
+          //  $("#cardImage").fadeIn();
+           if($.inArray(pictureeme["type"], validImagetypes)<0)
+           {
+            $("#changeprofile").addClass("is-invalid")
+            return;
+           }
+           else{
+             $("#changeprofile").removeClass("is-invalid");
+           }
+         }
+         reader.readAsDataURL(image_blog.files[0]);
+     
+      }
+     }
+     $("#changeprofile").change(function(){
+      previewImageSignup(this);
+      $( "#editProfile" ).click();
+     });
+</script>
+
+
