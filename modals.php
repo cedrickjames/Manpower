@@ -804,21 +804,34 @@ else{
       </div>
       <div class="modal-body">
       <form action="../system/import.php" method="POST" enctype="multipart/form-data">
+      <div class="mb-3 row">
+        <div class="col-sm-10">
+        <input type="file" class="form-control" name="import_file" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+        </div>
+    <div class="col-sm-2">
+    <div id="loader" style="display:none" class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    </div>
+  </div>
 
-      <div class="input-group">
-  <input type="file" class="form-control" name="import_file" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-</div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" name="save_excel_data" class="btn btn-primary">Proceed</button>
+        <button type="button" class="btn btn-secondary"  >Close</button>
+        <button type="submit" name="save_excel_data"  id="submitimport"class="btn btn-primary">Proceed</button>
       </div>
       </form>
     </div>
   </div>
 </div>
-
+<script>
+  $(document).ready(function(){
+  $("#submitimport").click(function(){
+    $("#loader").fadeIn(1000);
+  });
+});
+</script>
 
 
 <!-- Are you sure -->
@@ -843,3 +856,4 @@ else{
     </div>
   </div>
 </div>
+

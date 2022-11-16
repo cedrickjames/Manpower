@@ -8,10 +8,13 @@ require '../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+
 if(isset($_POST['save_excel_data']))
 {
 
     $rows = array();
+    array_push($rows, ['="Model"','="Lot No."','="Sub Code"','="Model Name"','="Due Date"','="Plan Qty"','="Sub Code Qty"','="Top Serial Number"','="Approval Status"', '="Approval Date"']);
+
     $fileName = $_FILES['import_file']['name'];
     $file_ext = pathinfo($fileName, PATHINFO_EXTENSION);
     $allowed_ext = ['xls','csv','xlsx'];
@@ -20,6 +23,9 @@ if(isset($_POST['save_excel_data']))
         $inputFileNamePath = $_FILES['import_file']['tmp_name'];
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileNamePath);
         $data = $spreadsheet->getActiveSheet()->toArray();
+        $highestRow =$spreadsheet->getActiveSheet()->getHighestRow();
+        echo "<script> console.log('$highestRow') </script>";
+
         $count = "0";
         $no = 1; //black
         $no2 = 1;
@@ -61,7 +67,6 @@ if(isset($_POST['save_excel_data']))
               $toSerialNo = $row['7'];
               $approvalstatus = $row['8'];
               $approvalDate = $row['9'];
-              
 
 
 
@@ -282,15 +287,17 @@ if(isset($_POST['save_excel_data']))
 
    
                     }
+                    
                      else if($numrows1==0){
-                        array_push($rows, ['="'.$modelName.'"','="'.$lot.'"','="'.$modelSuBCode.'"','="'.$date.'"','="'.$planqty.'"','="'.$ModelRealName.'"','="'.$subCodeQty.'"','="'.$toSerialNo.'"','="'.$approvalstatus.'"', '="'.$approvalDate.'"']);
+                        array_push($rows, ['="'.$modelName.'"','="'.$lot.'"','="'.$modelSuBCode.'"','="'.$ModelRealName.'"','="'.$date.'"','="'.$planqty.'"','="'.$subCodeQty.'"','="'.$toSerialNo.'"','="'.$approvalstatus.'"', '="'.$approvalDate.'"']);
         
                     }
   
  
                     }
                     else if($numrows==0){
-                        array_push($rows, ['="'.$modelName.'"','="'.$lot.'"','="'.$modelSuBCode.'"','="'.$date.'"','="'.$planqty.'"','="'.$ModelRealName.'"','="'.$subCodeQty.'"','="'.$toSerialNo.'"','="'.$approvalstatus.'"', '="'.$approvalDate.'"']);
+                        array_push($rows, ['="'.$modelName.'"','="'.$lot.'"','="'.$modelSuBCode.'"','="'.$ModelRealName.'"','="'.$date.'"','="'.$planqty.'"','="'.$subCodeQty.'"','="'.$toSerialNo.'"','="'.$approvalstatus.'"', '="'.$approvalDate.'"']);
+
 
 
 

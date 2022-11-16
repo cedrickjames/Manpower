@@ -256,9 +256,10 @@ if (isset($_POST['editProfile']) && $_POST['editProfile'] == 'Upload'){
 
 <?php include "./mainContent.php" ?>
 
+
 <!-- <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script> -->
 <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" ></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" ></script> -->
 
 

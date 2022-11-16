@@ -98,7 +98,7 @@ a=0;
 }
 var b=1;
 function showForecastOptions2(){
-  console.log("Options");
+
   if(b==0){
       document.getElementById("forecastOption2").style.display="block";
       document.getElementById("forecastOption2").classList.remove("mystyle");
@@ -528,5 +528,11 @@ function showSulok(){
   element.classList.remove("fa-caret-up");
   element.classList.add("fa-caret-down");
 }
+
+
+// $("#submitimport").click(function() {
+
+// });
+
 
 

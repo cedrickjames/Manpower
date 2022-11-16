@@ -742,7 +742,7 @@
   transition: 0.5s ease;
 }
 
-input[type=file] {
+.editProfile {
   opacity: 0;
   position: absolute;
   top: 0;
