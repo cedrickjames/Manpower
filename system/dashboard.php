@@ -2,6 +2,10 @@
 session_start();
 include ("../connection.php");
 
+if(!isset( $_SESSION['connected'])){
+  header("location:../signin.php");
+}
+
 $Department = $_SESSION['department'];
 
 $year='';
@@ -170,7 +174,7 @@ $startMonth = $date;
   <body>
   <?php include "../nav.php";?>
   <?php include "../sidebar.php" ?>
-
+  <?php include "../footer.php"?>
 <div class="main-content py-4" id="mainContent" >
   <div class="container text-center balance-container p-4">
     <div class="row h-100" >
@@ -270,6 +274,16 @@ $startMonth = $date;
   var requestOpt = document.getElementById("requestOpt");
   requestOpt.classList.remove("active");
 
+
+  var forecastopt3 = document.getElementById("footerForecast");
+  forecastopt3.classList.remove("footerActive");
+  var dashopt3 = document.getElementById("footerDashboard");
+  dashopt3.classList.add("footerActive");
+  var manpowerOpt3 = document.getElementById("footerManpower");
+  manpowerOpt3.classList.remove("footerActive");
+  var requestOpt3 = document.getElementById("footerSignup");
+  requestOpt3.classList.remove("footerActive");
+  document.getElementById("footerDashboard").href = "#";
 
   
   document.getElementById("dashboardOpt").href = "#";

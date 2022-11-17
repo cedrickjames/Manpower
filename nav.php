@@ -11,11 +11,16 @@
       <i class="fa-solid fa-bars fa-sm"></i>
 </span>
       <span class="navbar-brand  mb-0 h1">Manpower</span>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      </button> -->
+      <!-- <li class="flex-row-reverse navbar-toggler" onclick="showSulok()">
+          <div class="pictureBadge m-0" style="background-image: url('<?php echo $_SESSION['profile_picture'] ; ?>');"></div>
+
+      
+          </li> -->
+      <div class="" id="navbarNavDropdown">
         <ul class="navbar-nav ms-xl-5 ms-sm-0 mt-3 mt-sm-0 w-100 d-none">
           <li class="nav-item px-xl-2 ">
             <a class="nav-link active" aria-current="page" href="#">Production 1</a>

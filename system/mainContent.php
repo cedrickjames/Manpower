@@ -181,7 +181,14 @@ $chooseMonth = $_SESSION['month'];
             <div class="col">
               <!-- onclick="showTableForModel('<?php //echo $machineId;?>', '<?php //echo $machineName;?>')" -->
               <a class="card"   onclick="clickCard('<?php echo $machineId; ?>')" >
-                <img src="<?php echo $machinePhoto;?>" class="card-img-top" alt="..">
+                <!-- <img src="<?php echo $machinePhoto;?>" class="card-img-top" alt=".."> -->
+                <div class="card-img-top w-100" style="height: 200px ; background-color: #061362;
+    background-image: url('<?php echo $machinePhoto;?>');
+    background-size: cover;    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 33px;
+    padding: auto 0;margin: 0 auto;"></div>
                   <div class="card-body">
                     <h5 class="card-title"><?php echo $machineName;?></h5>
                   </div>

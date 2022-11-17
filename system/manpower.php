@@ -144,7 +144,7 @@ if(isset($_POST['card'])){
 
 
 <?php include "./manpowerContent.php" ?>
-
+<?php include "../footer.php"?>
 <!-- <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script> -->
 <!-- <script src="./node_modules/jquery/dist/jquery.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" ></script> -->
@@ -180,6 +180,16 @@ if(isset($_POST['card'])){
   requestOpt.classList.remove("active");
 
     
+  var forecastopt3 = document.getElementById("footerForecast");
+  forecastopt3.classList.remove("footerActive");
+  var dashopt3 = document.getElementById("footerDashboard");
+  dashopt3.classList.remove("footerActive");
+  var manpowerOpt3 = document.getElementById("footerManpower");
+  manpowerOpt3.classList.add("footerActive");
+  var requestOpt3 = document.getElementById("footerSignup");
+  requestOpt3.classList.remove("footerActive");
+  document.getElementById("footerManpower").href = "#";
+
   document.getElementById("manpowerOpt").href = "#";
   document.getElementById("manpowerOpt2").href = "#";
 </script>

@@ -1,6 +1,7 @@
 <?php
 session_start(); 
 include ("./connection.php");
+header("location: signin.php");
 // $sqlinsertTransact2= "INSERT INTO `samplecronjob`(`sample`) VALUES ('sdsdf')";
 // mysqli_query($con, $sqlinsertTransact2);
 ?>

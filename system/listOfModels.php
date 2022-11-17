@@ -23,11 +23,13 @@
                                  foreach($fetchDataModel as $data){
                                     $model_id = $data['model_id'];
                                    $modelName = $data['model_name'];
+                                   $model_line = $data['model_line'];
+
                                    $JapanSTU = $data['japan_stu'];
                                    $gpiSTU = $data['gpi_stu'];
                                    $actualTime = $data['actual_time'];
                                     
-                                   $selectEmployee = "SELECT * FROM `employees` WHERE `assign` = '$modelName'";
+                                   $selectEmployee = "SELECT * FROM `employees` WHERE `assign_line` = '$model_line'";
                                    $result = mysqli_query($con, $selectEmployee);
                                    $numrowspass = mysqli_num_rows($result);
 

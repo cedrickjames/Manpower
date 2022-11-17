@@ -52,7 +52,7 @@ session_start();
         <!-- <img id="signupImage" src="./samplePictures/GPI Machine/login.png" class="card-img-top" alt="..." style="border-radius: 50%"> -->
         <!-- <div class="card-img-top signup-img"> </div> -->
         <div class="card-img-top " id="signupImage" style="    height: 220px;
-    width: 40%;
+    width: 37%;
     background-color: #061362;
     background-image: url('samplePictures/GPI Machine/GFB 800.png');
     background-size: cover;
@@ -81,6 +81,13 @@ session_start();
 <div class="mb-3-signup">
   <div class="col-12">
     <input type="text" class="form-control" name="fullName" id="floatingInput" placeholder="Full Name">
+    <!-- <label for="floatingInput" class=form-label>Full Name</label> -->
+  </div>
+
+</div>
+<div class="mb-3-signup">
+  <div class="col-12">
+    <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="Email">
     <!-- <label for="floatingInput" class=form-label>Full Name</label> -->
   </div>
 
@@ -220,6 +227,8 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload'){
   $UserID = $_POST['UserID']; 
   $password = $_POST['Password'];      
   $confirmPass = $_POST['confirmPass'];      
+  $email = $_POST['email'];      
+
     $destinationPath='.'.$dest_path;
 
 
@@ -233,11 +242,11 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload'){
       if($password==$confirmPass){
 
         if($destinationPath=='.'){
-          $sqlinsert = "INSERT INTO `users`(`user_id`, `full_name`, `user_password`, `department`, `approved`) VALUES ('$UserID','$fullName','$password', '$Department',FALSE)";
+          $sqlinsert = "INSERT INTO `users`(`user_id`,`email`, `full_name`, `user_password`, `department`, `approved`) VALUES ('$UserID', '$email','$fullName','$password', '$Department',FALSE)";
           $registersql = mysqli_query($con, $sqlinsert);
         }
         else{
-          $sqlinsert = "INSERT INTO `users`(`user_id`, `full_name`, `user_password`, `department`,`profile_picture`, `approved`) VALUES ('$UserID','$fullName','$password', '$Department', '$destinationPath',FALSE)";
+          $sqlinsert = "INSERT INTO `users`(`user_id`,`email`, `full_name`, `user_password`, `department`,`profile_picture`, `approved`) VALUES ('$UserID','$email','$fullName','$password', '$Department', '$destinationPath',FALSE)";
           $registersql =  mysqli_query($con, $sqlinsert);
         }
      if($registersql){

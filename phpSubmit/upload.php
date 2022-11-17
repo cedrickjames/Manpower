@@ -57,9 +57,16 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload')
   $LTUpdated=$dateandTime;
   $destinationPath=$dest_path;
 
-
+if($destinationPath==''){
+  $sqlinsertLine = "INSERT INTO `line`(`line_name`, `line_desc`, `line_location`,`Department`, `last_time_updated`) VALUES ('$line_name','$machine_desc','$machine_loc','$Department','$LTUpdated');";
+  mysqli_query($con, $sqlinsertLine);
+}
+else{
   $sqlinsertLine = "INSERT INTO `line`(`line_name`, `line_desc`, `line_location`,`Department`, `last_time_updated`, `line_photo`,) VALUES ('$line_name','$machine_desc','$machine_loc','$Department','$LTUpdated','$destinationPath');";
   mysqli_query($con, $sqlinsertLine);
+}
+
+
   
 }
 $_SESSION['message'] = $message;

@@ -40,13 +40,17 @@ if(isset($_POST['sbtlogin'])){
     $username = $_POST['userId'];
     $password = $_POST['password'];
 
-    // $sql1 = "Select * FROM users WHERE username='$username' AND userpass='$password'";
-    $sql1 = "Select * FROM `users` WHERE `user_id`='$username'";
+    $sql1 = "Select * FROM `users` WHERE `user_id`='$username' OR `email` = '$username'";
 
     $result = mysqli_query($con, $sql1);
     $numrows = mysqli_num_rows($result);
 
-    $selectUserDept= "SELECT * FROM `users` WHERE `user_id` = '$username' LIMIT 1";
+    $sql1email = "Select * FROM `users` WHERE `email`='$username'";
+
+    $resultemail = mysqli_query($con, $sql1email);
+    $numrowsemail = mysqli_num_rows($resultemail);
+
+    $selectUserDept= "SELECT * FROM `users` WHERE `user_id` = '$username' OR `email` = '$username' LIMIT 1";
     $resultDept = mysqli_query($con, $selectUserDept);
     
     while($userRow = mysqli_fetch_assoc($resultDept)){
@@ -59,7 +63,9 @@ $_SESSION['userDept'] =  $userDept;
       
   }
 
-    if ($numrows == 0 ){
+    if ($numrows == 0 && $numrowsemail == 0){
+    
+
         $_SESSION['loginError'] = true;
         $userName = $_POST['userId']
         ?><script>
@@ -70,13 +76,19 @@ $_SESSION['userDept'] =  $userDept;
         //   footer: '<a href="">Why do I have this issue?</a>'
         })
          </script><?php 
+    
+       
     }
     else{
 
         $sqlpass = "Select * FROM users WHERE user_id = '$username' AND `user_password` = '$password';";
         $resultpass = mysqli_query($con, $sqlpass);
         $numrowspass = mysqli_num_rows($resultpass);
-if($numrowspass == 0){
+
+        $sqlpassemail = "Select * FROM users WHERE email = '$username' AND `user_password` = '$password';";
+        $resultpassemail = mysqli_query($con, $sqlpassemail);
+        $numrowspassemail = mysqli_num_rows($resultpassemail);
+if($numrowspass == 0 && $numrowspassemail == 0){
     ?><script>
     Swal.fire({
   icon: 'error',
@@ -156,7 +168,7 @@ else{
   <div class="mb-3">
   <div class="form-floating mb-3">
   <input type="text" class="form-control" id="floatingInput" name="userId" placeholder="name@example.com">
-  <label for="floatingInput">User Id</label>
+  <label for="floatingInput">User Id or Email</label>
 </div>
     
   </div>

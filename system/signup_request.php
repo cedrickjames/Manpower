@@ -80,9 +80,9 @@ if(isset($_POST['approveRequest'])){
 
 <!-- sidebar  -->
 <?php include "../sidebar.php" ?>
-
+<?php include "../footer.php"?>
 <div class="main-content p-5" id="mainContent">
-  <div id="forecastTable" class="<?php $show = $_SESSION['showTable']; if($show=="d-none"){echo "d-none";} else{ echo "";} ?>">
+  <div>
     <h2 class="fw-bolder text-dark ">Signup Request <?php echo  $_SESSION['showTable']; ?></h2>
 <!-- <input type="date" id="birthdaytime" onchange="tex" name="birthdaytime"> -->
 
@@ -172,6 +172,17 @@ if(isset($_POST['approveRequest'])){
 
   var requestOpt = document.getElementById("requestOpt2");
   requestOpt.classList.add("active");
+
+  
+  var forecastopt3 = document.getElementById("footerForecast");
+  forecastopt3.classList.remove("footerActive");
+  var dashopt3 = document.getElementById("footerDashboard");
+  dashopt3.classList.remove("footerActive");
+  var manpowerOpt3 = document.getElementById("footerManpower");
+  manpowerOpt3.classList.remove("footerActive");
+  var requestOpt3 = document.getElementById("footerSignup");
+  requestOpt3.classList.add("footerActive");
+  document.getElementById("footerSignup").href = "#";
 
   document.getElementById("requestOpt").href = "#";
   document.getElementById("requestOpt2").href = "#";

@@ -108,7 +108,7 @@ if(isset($_POST['save_excel_data']))
                 }
                 
                 if($numrows==1){
-                    $selectEmployee = "SELECT * FROM `employees` WHERE `assign` = '$model_name'";
+                    $selectEmployee = "SELECT * FROM `employees` WHERE `assign_line` = '$model_line'";
                     $result = mysqli_query($con, $selectEmployee);
 
                     $numOfPresentManpower = mysqli_num_rows($result);
@@ -169,7 +169,7 @@ if(isset($_POST['save_excel_data']))
                         
                         $numrows1 = mysqli_num_rows($resultModel1);
                         if($numrows1==1){
-                            $selectEmployee = "SELECT * FROM `employees` WHERE `assign` = '$model_name'";
+                            $selectEmployee = "SELECT * FROM `employees` WHERE `assign_line` = '$model_line'";
                             $result = mysqli_query($con, $selectEmployee);
                             $numOfPresentManpower = mysqli_num_rows($result);
                         
@@ -213,7 +213,7 @@ if(isset($_POST['save_excel_data']))
                         else if($numrows1>1){
 
                          if (strpos($lot , "BC")==""){
-                            $selectEmployee = "SELECT * FROM `employees` WHERE `assign` = '$model_name'";
+                            $selectEmployee = "SELECT * FROM `employees` WHERE `assign_line` = '$model_line'";
                             $result = mysqli_query($con, $selectEmployee);
                             $numOfPresentManpower = mysqli_num_rows($result);
                             
@@ -249,7 +249,7 @@ if(isset($_POST['save_excel_data']))
                                 
                         }
                         else if(strpos($lot , "BC")==0){
-                        $selectEmployee = "SELECT * FROM `employees` WHERE `assign` = '$model_name'";
+                        $selectEmployee = "SELECT * FROM `employees` WHERE `assign_line` = '$model_line'";
                         $result = mysqli_query($con, $selectEmployee);
                         $numOfPresentManpower = mysqli_num_rows($result);
                         

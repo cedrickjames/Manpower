@@ -256,6 +256,7 @@ if (isset($_POST['editProfile']) && $_POST['editProfile'] == 'Upload'){
 
 <?php include "./mainContent.php" ?>
 
+<?php include "../footer.php"?>
 
 <!-- <script src="../node_modules/jquery/dist/jquery.slim.min.js"></script> -->
 <!-- <script src="../node_modules/jquery/dist/jquery.min.js"></script> -->
@@ -280,17 +281,29 @@ if (isset($_POST['editProfile']) && $_POST['editProfile'] == 'Upload'){
   var requestOpt = document.getElementById("requestOpt");
   requestOpt.classList.remove("active");
 
-  var forecastopt = document.getElementById("forecastButton2");
-  forecastopt.classList.add("active");
-  var dashopt = document.getElementById("dashboardOpt2");
-  dashopt.classList.remove("active");
-  var manpowerOpt = document.getElementById("manpowerOpt2");
-  manpowerOpt.classList.remove("active");
-  var requestOpt = document.getElementById("requestOpt2");
-  requestOpt.classList.remove("active");
+  var forecastopt2 = document.getElementById("forecastButton2");
+  forecastopt2.classList.add("active");
+  var dashopt2 = document.getElementById("dashboardOpt2");
+  dashopt2.classList.remove("active");
+  var manpowerOpt2 = document.getElementById("manpowerOpt2");
+  manpowerOpt2.classList.remove("active");
+  var requestOpt2 = document.getElementById("requestOpt2");
+  requestOpt2.classList.remove("active");
 
+  var forecastopt3 = document.getElementById("footerForecast");
+  forecastopt3.classList.add("footerActive");
+  var dashopt3 = document.getElementById("footerDashboard");
+  dashopt3.classList.remove("footerActive");
+  var manpowerOpt3 = document.getElementById("footerManpower");
+  manpowerOpt3.classList.remove("footerActive");
+  var requestOpt3 = document.getElementById("footerSignup");
+  requestOpt3.classList.remove("footerActive");
+  document.getElementById("footerForecast").href = "#";
+
+  
   document.getElementById("forecastButton").href = "#";
   document.getElementById("forecastButton2").href = "#";
+
 
 </script>
 
