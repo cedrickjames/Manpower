@@ -814,11 +814,24 @@ else{
     </div>
     </div>
   </div>
+  <!-- <div class="mb-12 row"> -->
+  <div class="progress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated"  role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+</div>
+<!-- <script>
+  
+        // Set the width to animate the progress bar
+        // Along with time duration in milliseconds
+        $(".progress-bar").animate({
+                width: "70%",
+        }, 25000);
+    </script> -->
+  <!-- </div> -->
 
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"  >Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
         <button type="submit" name="save_excel_data"  id="submitimport"class="btn btn-primary">Proceed</button>
       </div>
       </form>

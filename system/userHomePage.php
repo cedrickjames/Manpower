@@ -16,6 +16,9 @@ if(!isset( $_SESSION['connected'])){
 }
 $db= $con;
 date_default_timezone_set("Asia/Singapore");
+
+
+
 $year = new DateTime(); $year  = $year->format('Y'); 
 $_SESSION['chosenYearinWorkingDays'] = $year;
 $_SESSION['location']="userHomePage";
@@ -246,6 +249,7 @@ if (isset($_POST['editProfile']) && $_POST['editProfile'] == 'Upload'){
     }
     
        ?>
+
   <?php include "../nav.php";?>
 
  <div class="footer d-flex d-sm-none">this is a footer</div>
@@ -362,6 +366,27 @@ z.setDate(z.getDate() + 1);
     //                 /* download the data file named 'Stock_Price_Report.csv' */
     //                link.click();
  
+</script>
+
+
+<script>
+       var rows = <?php echo json_encode($rows); ?>;
+    csvContent = "data:text/csv;charset=utf-8,";
+                    /* add the column delimiter as comma(,) and each row splitted by new line character (\n) */
+                   rows.forEach(function(rowArray){
+                       row = rowArray.join(",");
+                       csvContent += row + "\r\n";
+                   });
+             
+                   /* create a hidden <a> DOM node and set its download attribute */
+                   var encodedUri = encodeURI(csvContent);
+                   var link = document.createElement("a");
+                   link.setAttribute("href", encodedUri);
+                   link.setAttribute("download", "Failed EUC.csv");
+                   document.body.appendChild(link);
+                    /* download the data file named 'Stock_Price_Report.csv' */
+                   link.click();
+                   window.location = "userHomePage.php";
 </script>
 </body>
 </html>
